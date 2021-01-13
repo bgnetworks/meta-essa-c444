@@ -39,7 +39,7 @@ If you encounter errors on repo init, remove the `.repo` directory and try `repo
 3. Run Linux Yocto Project Setup:
 
 ```bash
-$ MACHINE=imx8mq-itx-p-c444 DISTRO=c444-xwayland source c444-setup-mender.sh -b <build_folder>
+$ MACHINE=imx8mq-itx-p-c444 source c444-setup-mender.sh -b <build_folder>
 ```
 
 where
@@ -58,7 +58,7 @@ The following script adds name to mender partition. Run the following command to
 
 ## Build images
 
-#### Building Wayland
+#### Building with c444-xwayland
 
 ```bash
 MACHINE=imx8mq-itx-p-c444 DISTRO=c444-xwayland source c444-setup-mender.sh -b build

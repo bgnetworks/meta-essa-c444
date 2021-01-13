@@ -26,7 +26,7 @@ echo "BBLAYERS += \" \${BSPDIR}/sources/meta-mender-community/meta-mender-c444 \
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-mender/meta-mender-core \"" >>conf/bblayers.conf
 
 cat ../sources/meta-mender-community/templates/local.conf.append >>conf/local.conf
-cat ../sources/meta-mender-community/meta-mender-imx/templates/local.conf.append >>conf/local.conf
+cat ../sources/meta-mender-community/meta-mender-c444/templates/local.conf.append >>conf/local.conf
 
 # Adding extra layer (meta-c444-jas)
 # Unrelated to mender integration
