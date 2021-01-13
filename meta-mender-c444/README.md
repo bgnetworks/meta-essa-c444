@@ -27,8 +27,8 @@ that have Mender integrated.
 
 ```bash
 mkdir mender-c444 && cd mender-c444
-repo init -u https://github.com/WinSystems/c444-manifest.git
-          -b master
+repo init -u https://github.com/WinSystems/c444-manifest.git \
+          -b master \
           -m itx-p-c444_5.4.24.xml
 
 wget --directory-prefix .repo/manifests https://raw.githubusercontent.com/danie007/meta-mender-c444/zeus/meta-mender-c444/scripts/c444_5.4.24_secure-mender-demo.xml
