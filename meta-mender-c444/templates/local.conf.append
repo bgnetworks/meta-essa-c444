@@ -1,0 +1,21 @@
+
+# Appended fragment from meta-mender-community/meta-mender-c444/templates
+
+# See https://docs.mender.io/2.3/artifacts/yocto-project/image-configuration/features
+# for details
+MENDER_FEATURES_ENABLE_append = " mender-uboot mender-image-sd"
+# Disable GRUB integration & the UEFI image
+MENDER_FEATURES_DISABLE_append = " mender-grub mender-image-uefi"
+
+MENDER_DEVICE_TYPE = 'imx8mq-itx-p-c444'
+MENDER_DEVICE_TYPES_COMPATIBLE = 'imx8mq-itx-p-c444'
+
+PREFERRED_PROVIDER_u-boot = "u-boot-imx"
+IMAGE_CLASSES += "mender-setup-c444"
+
+# Boot from eMMC on imx8mq-itx-p-c444
+# MENDER_STORAGE_DEVICE_imx8mq-itx-p-c444 = "/dev/mmcblk0"
+# MENDER_UBOOT_STORAGE_DEVICE_imx8mq-itx-p-c444 = "0"
+
+# Boot from SD
+MENDER_STORAGE_DEVICE_imx8mq-itx-p-c444 = "/dev/mmcblk1"

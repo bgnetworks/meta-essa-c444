@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+    <include name="itx-p-c444_5.4.24.xml" />
+
+    <remote fetch="https://github.com/mendersoftware" name="mender" />
+    <remote fetch="https://github.com/danie007" name="danie" />
+
+    <project name="meta-mender" remote="mender" revision="zeus" path="sources/meta-mender" />
+    <project name="meta-mender-c444" remote="danie" revision="zeus" path="sources/meta-mender-community">
+        <linkfile src="meta-mender-c444/scripts/c444-setup-mender.sh" dest="c444-setup-mender.sh" />
+        <linkfile src="meta-c444-jas/scripts/name-partition.sh" dest="name-partition.sh" />
+    </project>
+
+</manifest>

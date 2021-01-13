@@ -1,0 +1,105 @@
+
+# Appended fragment from meta-mender-community/meta-8mm/templates
+# Optimized build template
+
+
+DISTRO_FEATURES_append = " busybox"
+
+# Uncomment below line to use v2 image in splash screen
+# Default image is v1 (This can be used to differentiate
+# between mender updates)
+# SPLASH_IMG = 'v2'
+
+# See https://docs.mender.io/2.3/artifacts/yocto-project/image-configuration/features
+# for details
+MENDER_FEATURES_ENABLE_append = " \
+    mender-uboot \
+    mender-image-sd \
+    "
+
+# Remove the mender-inventory-geolocation script
+PACKAGECONFIG_remove_pn-mender-client = " inventory-network-scripts"
+
+# system performance analyser (startup)
+# Text UI library
+# basic shell utilities
+IMAGE_INSTALL_append = " \
+    systemd-analyze \
+    whiptail \
+    busybox \
+    "
+
+IMAGE_OVERHEAD_FACTOR = "1.2"
+
+# Disabling mender's data grow service (extend the image to fully occupy SD card)
+MENDER_FEATURES_DISABLE_append = " mender-growfs-data"
+
+# Disabling boot partition from mender image
+# Mender use rootfs /boot to store and boot kernel & DTBs
+MENDER_BOOT_PART_SIZE_MB_imx8mq-itx-p-c444  = "0"
+
+# The size of the persistent data partition
+MENDER_DATA_PART_SIZE_MB_imx8mq-itx-p-c444  = "32"
+
+# Total size of the medium that mender partitioned images will be written to, expressed in MB
+# See https://docs.mender.io/1.5/artifacts/variables#mender_storage_total_size_mb
+# for details
+MENDER_STORAGE_TOTAL_SIZE_MB_imx8mq-itx-p-c444  = "512"
+
+# Uncomment and update the below line to enable fit & Image signing (authenticated)
+# Update the full path of the CST folder (It should contain the cst along with the certificates)
+# SIGN_FIT = "true"
+# SIGN_IMAGE = "true"
+# CST = ""
+
+# Optimization
+
+# Vigiles is a vulnerability management tool that provides build-time Yocto CVE Analysis of target images
+# For more details: https://www.nxp.com/docs/en/user-guide/IMX_YOCTO_PROJECT_USERS_GUIDE.pdf
+# INHERIT += "vigiles"
+
+# Removing Unused Packages from the image
+IMAGE_INSTALL_remove += " \
+    perl5 \
+    sqlite3 \
+    bluez5 \
+    python \
+    python3 \
+    packagegroup-fsl-tools-testapps \
+    wic-tools \
+    "
+
+# Ripping down unwanted DISTRO features
+DISTRO_FEATURES_remove += " \
+    bluetooth \
+    wifi \
+    3g \
+    opengl \
+    x11 \
+    nfc \
+    nfs \
+    alsa \
+    alsa-utils \
+    ext2 \
+    ipv6 \
+    largefile \
+    pcmcia \
+    xattr \
+    ptest \
+    vulkan \
+    jailhouse \
+    linux-factory \
+    pam \
+    pulseaudio \
+    coreutils \
+    shadow \
+    "
+
+# Setting the root password as toor
+# INHERIT += "extrausers"
+# EXTRA_USERS_PARAMS = "usermod -p $(openssl passwd toor) root"
+
+# Having separate download & shared state cache speeds up build and save space
+# Replace $HOME with your home directory
+# DL_DIR = "$HOME/.yocto/downloads/"
+# SSTATE_DIR = "$HOME/.yocto/mx8mm/zeus/sstate-cache/"

@@ -1,0 +1,23 @@
+From 12e934c874268f6f3a54b8a6dda7e2244851f317 Mon Sep 17 00:00:00 2001
+From: danie007 <danilselvan@gmail.com>
+Date: Wed, 13 Jan 2021 12:02:14 +0530
+Subject: [PATCH] Improve boot startup time
+
+Enable u-boot block cache
+
+Signed-off-by: danie007 <danilselvan@gmail.com>
+---
+ configs/imx8mq_evk_defconfig | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/configs/imx8mq_evk_defconfig b/configs/imx8mq_evk_defconfig
+index c4ebf250b0..3ca8ad8744 100644
+--- a/configs/imx8mq_evk_defconfig
++++ b/configs/imx8mq_evk_defconfig
+@@ -127,3 +127,6 @@ CONFIG_SYS_WHITE_ON_BLACK=y
+ # Added by Yocto for Mender support
+ CONFIG_BOOTCOUNT_LIMIT=y
+ CONFIG_BOOTCOUNT_ENV=y
++
++# Added by Yocto to improve boot startup time
++CONFIG_BLOCK_CACHE=y

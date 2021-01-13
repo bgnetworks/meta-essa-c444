@@ -1,0 +1,90 @@
+From 558ed69ace2ad74ab019a468e557c731f532d9d4 Mon Sep 17 00:00:00 2001
+From: danie007 <danilselvan@gmail.com>
+Date: Tue, 12 Jan 2021 15:14:07 +0530
+Subject: [PATCH] Add mender support
+
+1. imx8mq_evk_defconfig
+  - Add bootcount env variable
+2. imx8mq_evk.h
+  - Change image & FDT locations to root FS
+  - Change load methods to ext4
+  - Remove bootscript loading
+  - Include mender_setup before booting
+
+Signed-off-by: danie007 <danilselvan@gmail.com>
+---
+ configs/imx8mq_evk_defconfig |  4 ++++
+ include/configs/imx8mq_evk.h | 31 +++++++++++++------------------
+ 2 files changed, 17 insertions(+), 18 deletions(-)
+
+diff --git a/configs/imx8mq_evk_defconfig b/configs/imx8mq_evk_defconfig
+index 42c1968a75..c4ebf250b0 100644
+--- a/configs/imx8mq_evk_defconfig
++++ b/configs/imx8mq_evk_defconfig
+@@ -123,3 +123,7 @@ CONFIG_VIDEO_IMX8M_DCSS=y
+ CONFIG_VIDEO_IMX8M_HDMI=y
+ CONFIG_DM_VIDEO=y
+ CONFIG_SYS_WHITE_ON_BLACK=y
++
++# Added by Yocto for Mender support
++CONFIG_BOOTCOUNT_LIMIT=y
++CONFIG_BOOTCOUNT_ENV=y
+diff --git a/include/configs/imx8mq_evk.h b/include/configs/imx8mq_evk.h
+index f68437c39b..6ef8ec6083 100644
+--- a/include/configs/imx8mq_evk.h
++++ b/include/configs/imx8mq_evk.h
+@@ -85,26 +85,21 @@
+ 	CONFIG_MFG_ENV_SETTINGS \
+ 	JAILHOUSE_ENV \
+ 	"kernel_addr_r=${loadaddr}\0" \
+-	"script=boot.scr\0" \
+-	"image=Image\0" \
++	"image=boot/Image\0" \
+ 	"splashimage=0x50000000\0" \
+ 	"console=ttymxc0,115200\0" \
+ 	"fdt_addr=0x43000000\0"			\
+ 	"fdt_high=0xffffffffffffffff\0"		\
+ 	"boot_fdt=try\0" \
+-	"fdt_file=imx8mq-itx-p-c444.dtb\0" \
++	"fdt_file=boot/imx8mq-itx-p-c444.dtb\0" \
+ 	"initrd_addr=0x43800000\0"		\
+ 	"initrd_high=0xffffffffffffffff\0" \
+ 	"mmcdev="__stringify(CONFIG_SYS_MMC_ENV_DEV)"\0" \
+-	"mmcpart=" __stringify(CONFIG_SYS_MMC_IMG_LOAD_PART) "\0" \
+ 	"mmcroot=" CONFIG_MMCROOT " rootwait rw\0" \
+ 	"mmcautodetect=yes\0" \
+-	"mmcargs=setenv bootargs ${jh_clk} console=${console} root=${mmcroot}\0 " \
+-	"loadbootscript=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${script};\0" \
+-	"bootscript=echo Running bootscript from mmc ...; " \
+-		"source\0" \
+-	"loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}\0" \
+-	"loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr} ${fdt_file}\0" \
++	"mmcargs=setenv bootargs ${jh_clk} console=${console} root=${mender_kernel_root}\0 " \
++	"loadimage=ext4load ${mender_uboot_root} ${loadaddr} ${image}\0" \
++	"loadfdt=ext4load ${mender_uboot_root} ${fdt_addr} ${fdt_file}\0" \
+ 	"mmcboot=echo Booting from mmc ...; " \
+ 		"run mmcargs; " \
+ 		"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
+@@ -139,14 +134,14 @@
+ 
+ #define CONFIG_BOOTCOMMAND \
+ 	   "mmc dev ${mmcdev}; if mmc rescan; then " \
+-		   "if run loadbootscript; then " \
+-			   "run bootscript; " \
+-		   "else " \
+-			   "if run loadimage; then " \
+-				   "run mmcboot; " \
+-			   "else run netboot; " \
+-			   "fi; " \
+-		   "fi; " \
++			"run mender_setup; " \
++			"if run loadimage; then " \
++				"run mmcboot; " \
++				"run mender_try_to_recover; " \
++			"else " \
++				"run mender_try_to_recover; " \
++				"run netboot; " \
++			"fi; " \
+ 	   "else booti ${loadaddr} - ${fdt_addr}; fi"
+ 
+ /* Link Definitions */
