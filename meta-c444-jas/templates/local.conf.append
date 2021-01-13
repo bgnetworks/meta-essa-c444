@@ -102,4 +102,4 @@ DISTRO_FEATURES_remove += " \
 # Having separate download & shared state cache speeds up build and save space
 # Replace $HOME with your home directory
 # DL_DIR = "$HOME/.yocto/downloads/"
-# SSTATE_DIR = "$HOME/.yocto/mx8mm/zeus/sstate-cache/"
+# SSTATE_DIR = "$HOME/.yocto/sstate-cache/"
