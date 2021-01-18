@@ -3,7 +3,7 @@
 # sys_setup.sh
 # Configure system for the first time
 #
-# 24.11.200
+# 24.11.2020
 # Daniel Selvan, Jasmin Infotech
 
 # Lowering the kernel print
@@ -12,14 +12,14 @@ echo "kernel.printk = 2 2 0 2" >/etc/sysctl.d/klog.conf
 
 ###################################################################################################
 
-#           Configuring Integrity block NOT WORKING (update to cryptsetup)
+#           Configuring Integrity block
 
 ###################################################################################################
 
 integritysetup="/usr/sbin/integritysetup"
 keylen=4 # Currently supporting this only.
 
-[ -e /dev/mmcblk1p3 ] && {
+[ -e /dev/mmcblk1p4 ] && {
     # (Optional) unmounting & closing the authenticated block
     umount /home
     $integritysetup close ihome
@@ -27,18 +27,16 @@ keylen=4 # Currently supporting this only.
     rm -f /data/itr.key 2>/dev/null
 
     # Creating a key file
-    # tr -dc A-Za-z0-9 </dev/urandom | head -c $keylen >/data/itr.key
-    echo "h0lo" >/data/itr.key
-
+    tr -dc A-Za-z0-9 </dev/urandom | head -c $keylen >/data/itr.key
 
     # Deny any access for other users than root(read only)
     chmod 400 /data/itr.key
 
     # Format the device with default standalone mode (CRC32C)
-    echo -n "YES" | $integritysetup format --integrity-key-size $keylen --integrity-key-file /data/itr.key /dev/mmcblk1p3 -
+    echo -n "YES" | $integritysetup format --integrity-key-size $keylen --integrity-key-file /data/itr.key /dev/mmcblk1p4 -
 
     # Open the device with default parameters
-    $integritysetup open --integrity-key-size $keylen --integrity-key-file /data/itr.key /dev/mmcblk1p3 ihome
+    $integritysetup open --integrity-key-size $keylen --integrity-key-file /data/itr.key /dev/mmcblk1p4 ihome
     mkfs.ext4 -b 4096 /dev/mapper/ihome # Creating ext4 filesystem in authenticated block
     rm -rf /home 2>/dev/null            # Deleting old home
     mkdir -p /home                      # Creating mount point
@@ -49,7 +47,7 @@ keylen=4 # Currently supporting this only.
 
     cat >/usr/ihome.sh <<EOF
 #!/bin/bash
-$integritysetup open --integrity-key-size $keylen --integrity-key-file /data/itr.key /dev/mmcblk1p3 ihome
+$integritysetup open --integrity-key-size $keylen --integrity-key-file /data/itr.key /dev/mmcblk1p4 ihome
 # Creating mount point
 mkdir -p /home
 # Mounting authenticated home dir
