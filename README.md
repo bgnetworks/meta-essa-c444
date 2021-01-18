@@ -85,4 +85,4 @@ Always include the maintainers when suggesting code changes to this layer.
 
 ## KNOWN ISSUE
 
-`repo sync` won't work on private repositories and hence the above commands can only be executed successfully, if this repo's visibility changes to **Public**
+`repo sync` won't work on private repositories and hence the above commands can only be executed successfully, if this repo's visibility is **Public**
