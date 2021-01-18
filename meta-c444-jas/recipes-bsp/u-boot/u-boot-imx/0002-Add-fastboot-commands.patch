@@ -1,0 +1,216 @@
+From 1c672362cad005cceec17200f3278e3b84603199 Mon Sep 17 00:00:00 2001
+From: danie007 <danilselvan@gmail.com>
+Date: Mon, 18 Jan 2021 16:32:01 +0530
+Subject: [PATCH] Add fastboot commands
+
+Fastboot commands,
+  1. read-dekblob
+  2. read-fuses
+  3. read-srktbl
+are added to automate the encryption with "UUU" tool
+
+Signed-off-by: danie007 <danilselvan@gmail.com>
+---
+ drivers/fastboot/fb_fsl/fb_fsl_getvar.c | 132 +++++++++++++++++++++++-
+ 1 file changed, 128 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/fastboot/fb_fsl/fb_fsl_getvar.c b/drivers/fastboot/fb_fsl/fb_fsl_getvar.c
+index 99efda64d3..a26307587d 100644
+--- a/drivers/fastboot/fb_fsl/fb_fsl_getvar.c
++++ b/drivers/fastboot/fb_fsl/fb_fsl_getvar.c
+@@ -1,6 +1,9 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ /*
+  * Copyright 2019 NXP
++ * 
++ * Edited by Daniel Selvan <daniel.selvan@jasmin-infotech.com>
++ * Added 3 fastboot commands: "read-dekblob", "read-fuses", "read-srktbl"
+  */
+ 
+ #include <common.h>
+@@ -20,6 +23,7 @@
+ #include <asm/setup.h>
+ #include <env.h>
+ #include <version.h>
++#include <mapmem.h>
+ 
+ #ifdef CONFIG_AVB_SUPPORT
+ #include <dt_table.h>
+@@ -48,13 +52,25 @@
+ #endif
+ 
+ #if defined(CONFIG_ANDROID_THINGS_SUPPORT) && defined(CONFIG_ARCH_IMX8M)
+-#define FASTBOOT_COMMON_VAR_NUM 15
++#define FASTBOOT_COMMON_VAR_NUM 16
+ #else
+-#define FASTBOOT_COMMON_VAR_NUM 14
++#define FASTBOOT_COMMON_VAR_NUM 17
+ #endif
++#define FASTBOOT_COMMON_HIDDEN_VAR_NUM 3
+ 
+ #define FASTBOOT_VAR_YES    "yes"
+ #define FASTBOOT_VAR_NO     "no"
++ 
++// Added by BGN
++#define MAX_FUSES_PER_FETCH   4
++#define ASCII_BYTES_PER_FUSE  8
++#define DFLT_FUSE_BUFFER_SIZE (MAX_FUSES_PER_FETCH * ASCII_BYTES_PER_FUSE) 
++#define DFLT_DEK_BUFFER_SIZE  (64)
++#define DFLT_DEKBLOB_ADDR     0x40401000	// default address imx8mm-evk
++#define DFLT_DEKBLOB_KEYSIZE  128
++#define DEKBLOB_SIZE_128      0x48
++#define DEKBLOB_SIZE_192      0x50
++#define DEKBLOB_SIZE_256      0x58
+ 
+ /* common variables of fastboot getvar command */
+ char *fastboot_common_var[FASTBOOT_COMMON_VAR_NUM] = {
+@@ -75,13 +91,22 @@ char *fastboot_common_var[FASTBOOT_COMMON_VAR_NUM] = {
+ #if defined(CONFIG_ANDROID_THINGS_SUPPORT) && defined(CONFIG_ARCH_IMX8M)
+ 	"baseboard_id"
+ #endif
++	// Hidden commands
++	"read-dekblob",
++	"read-fuses",
++	"read-srktbl"
+ };
+ 
++extern int fuse_read(u32 bank, u32 word, u32 *val);
++
++// Added by BGN
++static void dek_blob_read(char *buffer);
++static void fuse_bank_read(char *buffer, int header);
++
+ /* at-vboot-state variable list */
+ #ifdef CONFIG_AVB_ATX
+ #define AT_VBOOT_STATE_VAR_NUM 6
+ extern struct imx_sec_config_fuse_t const imx_sec_config_fuse;
+-extern int fuse_read(u32 bank, u32 word, u32 *val);
+ 
+ char *fastboot_at_vboot_state_var[AT_VBOOT_STATE_VAR_NUM] = {
+ 	"bootloader-locked",
+@@ -155,6 +180,9 @@ static void uuid_hex2string(uint8_t *uuid, char* buf, uint32_t uuid_len, uint32_
+ int get_imx8m_baseboard_id(void);
+ #endif
+ 
++char dek_buffer[DFLT_DEK_BUFFER_SIZE];
++char fuse_buffer[DFLT_FUSE_BUFFER_SIZE];
++
+ static int get_single_var(char *cmd, char *response)
+ {
+ 	char *str = cmd;
+@@ -210,6 +238,19 @@ static int get_single_var(char *cmd, char *response)
+ 		strncat(response, "0mV", chars_left);
+ 	} else if (!strcmp_l1("battery-soc-ok", cmd)) {
+ 		strncat(response, "yes", chars_left);
++	// Added by BGN
++	} else if (!strcmp_l1("read-dekblob", cmd)) {
++		memset(dek_buffer, 0, DFLT_DEK_BUFFER_SIZE);
++		dek_blob_read(dek_buffer);
++		strncat(response, dek_buffer, chars_left);
++	} else if (!strcmp_l1("read-fuses", cmd)) {
++		memset(fuse_buffer, 0, DFLT_FUSE_BUFFER_SIZE);
++		fuse_bank_read(fuse_buffer, 1);
++		strncat(response, fuse_buffer, chars_left);
++	} else if (!strcmp_l1("read-srktbl", cmd)) {
++		memset(fuse_buffer, 0, DFLT_FUSE_BUFFER_SIZE);
++		fuse_bank_read(fuse_buffer, 1);
++		strncat(response, fuse_buffer, chars_left);
+ 	} else if (!strcmp_l1("variant", cmd)) {
+ 		strncat(response, VARIANT_NAME, chars_left);
+ 	} else if (!strcmp_l1("off-mode-charge", cmd)) {
+@@ -467,7 +508,7 @@ void fastboot_getvar(char *cmd, char *response)
+ 
+ 
+ 		/* get common variables */
+-		for (n = 0; n < FASTBOOT_COMMON_VAR_NUM; n++) {
++		for (n = 0; n < FASTBOOT_COMMON_VAR_NUM - FASTBOOT_COMMON_HIDDEN_VAR_NUM; n++) {
+ 			snprintf(response, FASTBOOT_RESPONSE_LEN, "INFO%s:", fastboot_common_var[n]);
+ 			get_single_var(fastboot_common_var[n], response);
+ 			fastboot_tx_write_more(response);
+@@ -581,3 +622,86 @@ void fastboot_getvar(char *cmd, char *response)
+ 		return;
+ 	}
+ }
++
++// read dek-blob and convert into string
++static void dek_blob_read(char *buffer)
++{
++	int dek_slice;
++
++	// Copy of pointer
++	char *pbuffer = buffer;
++
++	// Get address
++	int addr = (int)env_get_ulong("fastboot_buffer", 16, DFLT_DEKBLOB_ADDR);
++
++	// Get offset
++	uint16_t offset = (uint16_t)env_get_ulong("fastboot_offset", 10, 0);
++
++	// Get number to fetch
++	int key_size = (int)env_get_ulong("fastboot_size", 10, DFLT_DEKBLOB_KEYSIZE);
++
++	if (key_size == 256)
++		dek_slice = DEKBLOB_SIZE_256 / 4;
++	else if (key_size == 192)
++		dek_slice = DEKBLOB_SIZE_192 / 4;
++	else
++		dek_slice = DEKBLOB_SIZE_128 / 4;
++
++	// Adjust addr pointer based on offset
++	addr += (dek_slice * offset);
++
++	// Map this memory
++	const void *buf = map_sysmem(addr, dek_slice);
++
++	// Write offset and slice size to output buffer
++	sprintf(pbuffer, "%02d%02d", offset, dek_slice);
++
++	// Adjust pointer
++	pbuffer += 4;
++
++	// Iterate thru dek-blob buffer, convert to ASCII
++	for (int i = 0; i < dek_slice; i++)
++	{
++		uint8_t value = *(volatile uint8_t *)buf;
++		buf += sizeof(uint8_t);
++		sprintf(pbuffer, "%02x", value);
++		pbuffer += 2;
++	}
++
++	// Release buffer
++	unmap_sysmem(buf);
++}
++
++#define DFLT_FUSE_BANK 3
++#define DFLT_FUSE_OFFSET 0
++#define DFLT_FUSE_SIZE 4
++#define BYTES_PER_FUSE 4 // 8 ASCII characters
++
++static void fuse_bank_read(char *buffer, int header)
++{
++	char *pbuffer = buffer;
++
++	// Get bank
++	int bank = (int)env_get_ulong("fastboot_bank", 10, DFLT_FUSE_BANK);
++
++	// Get offset
++	int offset = (int)env_get_ulong("fastboot_offset", 10, DFLT_FUSE_OFFSET);
++
++	// Get number to fetch
++	int num_fuses = (int)env_get_ulong("fastboot_size", 10, DFLT_FUSE_SIZE);
++
++	if (header == 1)
++	{
++		sprintf(pbuffer, "%02d%02d", offset, (num_fuses * BYTES_PER_FUSE));
++		pbuffer += 4;
++	}
++
++	// Read fuses and convert to ASCII
++	u32 val;
++	for (int i = 0; i < num_fuses; i++)
++	{
++		fuse_read(bank, offset + i, &val);
++		sprintf(pbuffer, "%08x", val);
++		pbuffer += 8;
++	}
++}

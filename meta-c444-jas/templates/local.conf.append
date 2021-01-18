@@ -2,6 +2,8 @@
 # Appended fragment from meta-mender-community/meta-8mm/templates
 # Optimized build template
 
+KERNEL_DEVICETREE = "freescale/imx8mq-itx-p-c444.dtb"
+
 DISTRO_FEATURES_append = " busybox"
 
 # Uncomment below line to use v2 image in splash screen
