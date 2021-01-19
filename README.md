@@ -87,4 +87,4 @@ Always include the maintainers when suggesting code changes to this layer.
 
 ## LIMITATION
 
-`repo sync` won't work on private repositories and hence the above commands can only be executed successfully, if this repo's visibility is **Public**
+`repo sync` won't download from private repositories and hence the above commands can only be executed successfully, if this repo's visibility is **Public**
