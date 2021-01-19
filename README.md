@@ -22,8 +22,6 @@ See the Guide for instructions on installing repo.
 
 ```bash
 repo init -u https://github.com/WinSystems/c444-manifest.git -b master -m itx-p-c444_5.4.24.xml
-
-# Can be downloaded from public repositories only
 wget --directory-prefix .repo/manifests https://raw.githubusercontent.com/danie007/meta-mender-c444/zeus/meta-mender-c444/scripts/c444_5.4.24_secure-mender-demo.xml
 repo init -m c444_5.4.24_secure-mender-demo.xml
 ```
