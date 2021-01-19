@@ -2,7 +2,7 @@
 # Appended fragment from meta-mender-community/meta-8mm/templates
 # Optimized build template
 
-KERNEL_DEVICETREE = "freescale/imx8mq-itx-p-c444.dtb"
+IMXBOOT_TARGETS_append = " print_fit_hab"
 
 DISTRO_FEATURES_append = " busybox"
 
@@ -47,13 +47,9 @@ MENDER_DATA_PART_SIZE_MB_imx8mq-itx-p-c444  = "32"
 # for details
 MENDER_STORAGE_TOTAL_SIZE_MB_imx8mq-itx-p-c444  = "512"
 
-# Uncomment and update the below line to enable fit & Image signing (authenticated)
-# Update the full path of the CST folder (It should contain the cst along with the certificates)
-# SIGN_FIT = "true"
-# SIGN_IMAGE = "true"
-# CST = ""
-
 # Optimization
+
+KERNEL_DEVICETREE = "freescale/imx8mq-itx-p-c444.dtb"
 
 # Vigiles is a vulnerability management tool that provides build-time Yocto CVE Analysis of target images
 # For more details: https://www.nxp.com/docs/en/user-guide/IMX_YOCTO_PROJECT_USERS_GUIDE.pdf
