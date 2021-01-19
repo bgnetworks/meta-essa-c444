@@ -53,6 +53,7 @@ The following script name partitions in the image as primary, secondary & data i
 Run the following command to apply the patch.
 
 ```shell
+# cd into BSPDIR
 ./name-partition.sh
 ```
 
