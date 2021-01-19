@@ -34,12 +34,12 @@ repo init -m c444_5.4.24_secure-mender-demo.xml
 repo sync -j$(nproc)
 ```
 
-If you encounter errors on repo init, remove the `.repo` directory and try `repo init` again.
+If you encounter errors on repo init or sync, remove the `.repo` directory and try `repo init` again.
 
 3. Run Linux Yocto Project Setup:
 
 ```bash
-$ MACHINE=imx8mq-itx-p-c444 source c444-setup-mender.sh -b <build_folder>
+$ MACHINE=imx8mq-itx-p-c444 DISTRO=c444-xwayland source c444-setup-mender.sh -b <build_folder>
 ```
 
 where
@@ -50,7 +50,9 @@ After this your system will be configured to start a Yocto Project build.
 
 ## (Optional) Adding name to mender partitions
 
-The following script adds name to mender partition. Run the following command to apply the patch.
+The following script name partitions in the image as primary, secondary & data instead of block's UUID.
+
+Run the following command to apply the patch.
 
 ```shell
 ./name-partition.sh
@@ -66,6 +68,8 @@ bitbake core-image-base
 ```
 
 **core-image-base**: "A console-only image that fully supports the target device hardware."
+
+_NOTE_: This integration is exclusively tested for core-image-base
 
 ## Contributing
 
@@ -83,6 +87,6 @@ The author(s) and maintainer(s) of this layer is(are):
 
 Always include the maintainers when suggesting code changes to this layer.
 
-## KNOWN ISSUE
+## LIMITATION
 
 `repo sync` won't work on private repositories and hence the above commands can only be executed successfully, if this repo's visibility is **Public**
