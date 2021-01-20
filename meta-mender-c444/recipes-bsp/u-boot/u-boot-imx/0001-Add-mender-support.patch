@@ -1,7 +1,7 @@
 From 558ed69ace2ad74ab019a468e557c731f532d9d4 Mon Sep 17 00:00:00 2001
 From: danie007 <danilselvan@gmail.com>
 Date: Tue, 12 Jan 2021 15:14:07 +0530
-Subject: [PATCH] Add mender support
+Subject: [PATCH 1/4] Add mender support
 
 1. imx8mq_evk_defconfig
   - Add bootcount env variable

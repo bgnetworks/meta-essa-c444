@@ -1,9 +1,9 @@
 From 1f778341bd600db36eeb7d8477e42f8f9bbc97f7 Mon Sep 17 00:00:00 2001
 From: danie007 <danilselvan@gmail.com>
 Date: Tue, 12 Jan 2021 15:59:20 +0530
-Subject: [PATCH] Add redundant environment
+Subject: [PATCH 2/4] Add redundant environment
 
-Add #define CONFIG_SYS_REDUNDAND_ENVIRONMENT in imx8mm_evk.h to fix error
+Add #define CONFIG_SYS_REDUNDAND_ENVIRONMENT in imx8mq_evk.h to fix error
 CONFIG_SYS_REDUNDAND_ENVIRONMENT is required for Mender to work
 
 Signed-off-by: danie007 <danilselvan@gmail.com>

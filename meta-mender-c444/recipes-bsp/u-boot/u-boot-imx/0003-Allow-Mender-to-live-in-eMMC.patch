@@ -1,7 +1,7 @@
 From 7051f71e45a73b0ef5325bde5de08f5796f50908 Mon Sep 17 00:00:00 2001
 From: danie007 <danilselvan@gmail.com>
 Date: Wed, 13 Jan 2021 11:56:01 +0530
-Subject: [PATCH] Allow Mender to live in eMMC
+Subject: [PATCH 3/4] Allow Mender to live in eMMC
 
 Remove option binding Mender exclusively to SD Card on imx8mq platform
 * Fed this via local.conf
