@@ -9,7 +9,7 @@ DISTRO_FEATURES_append = " busybox"
 # Uncomment below line to use v2 image in splash screen
 # Default image is v1 (This can be used to differentiate
 # between mender updates)
-# SPLASH_IMG = 'v2'
+# SPLASH_IMG = "v2"
 
 # See https://docs.mender.io/2.3/artifacts/yocto-project/image-configuration/features
 # for details

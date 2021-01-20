@@ -48,27 +48,78 @@ After this your system will be configured to start a Yocto Project build.
 
 ## (Optional) Adding name to mender partitions
 
-The following script name partitions in the image as primary, secondary & data instead of block's UUID.
+The following script name partitions in the image as primary & secondary instead of block's UUID.
 
 Run the following command to apply the patch.
 
 ```shell
-# cd into BSPDIR
 ./name-partition.sh
 ```
 
-## Build images
+## Build image
 
-#### Building with c444-xwayland
+#### 1. Setup
+
+**a. For first build**
+
+**i. Initialise build with c444-xwayland**
+
+For setting up the build initially,
 
 ```bash
 MACHINE=imx8mq-itx-p-c444 DISTRO=c444-xwayland source c444-setup-mender.sh -b build
+```
+
+**ii. Manual configuration**
+
+Open `conf/local.conf` in your favorite editor and configure it as follows (these configurations are verified for this repo build)
+
+- Delete `EXTRA_IMAGE_FEATURES += "package-management"` line
+- Paste your `MENDER_TENANT_TOKEN` on the placeholder (steps given on)
+
+**Optional configurations:**
+
+- To change the boot medium to eMMC (default SD Card), uncomment the following two lines:
+
+```bash
+# Boot from eMMC on imx8mq-itx-p-c444
+MENDER_STORAGE_DEVICE_imx8mq-itx-p-c444 = "/dev/mmcblk0"
+MENDER_UBOOT_STORAGE_DEVICE_imx8mq-itx-p-c444 = "0"
+```
+
+- To change the splash image to v2 (default version 1) uncomment `SPLASH_IMG = "v2"`
+- To assign password to `root` user, delete `EXTRA_IMAGE_FEATURES ?= "debug-tweaks"` and uncomment the following lines:
+
+```bash
+# Setting the root password as toor
+INHERIT += "extrausers"
+EXTRA_USERS_PARAMS = "usermod -p $(openssl passwd toor) root"
+```
+
+**b. For subsequent builds**
+
+<details>
+<summary>
+Click to expand
+</summary>
+
+For subsequent builds, (_this will export yocto variables, hence bitbake and other build commands can be recognized_)
+
+```bash
+source setup-environment build
+```
+
+</details>
+
+#### 2. Build
+
+_NOTE_: This integration is exclusively tested for core-image-base
+
+```bash
 bitbake core-image-base
 ```
 
 **core-image-base**: "A console-only image that fully supports the target device hardware."
-
-_NOTE_: This integration is exclusively tested for core-image-base
 
 ## Contributing
 
