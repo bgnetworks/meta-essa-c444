@@ -19,7 +19,10 @@ echo "kernel.printk = 2 2 0 2" >/etc/sysctl.d/klog.conf
 integritysetup="/usr/sbin/integritysetup"
 keylen=4 # Currently supporting this only.
 
-[ -e /dev/mmcblk1p4 ] && {
+integrity_blk="/dev/mmcblk1p4" # For SD Card
+# integrity_blk="/dev/mmcblk0p4" # For eMMC
+
+[ -e integrity_blk ] && {
     # (Optional) unmounting & closing the authenticated block
     umount /home
     $integritysetup close ihome
@@ -33,10 +36,10 @@ keylen=4 # Currently supporting this only.
     chmod 400 /data/itr.key
 
     # Format the device with default standalone mode (CRC32C)
-    echo -n "YES" | $integritysetup format --integrity-key-size $keylen --integrity-key-file /data/itr.key /dev/mmcblk1p4 -
+    echo -n "YES" | $integritysetup format --integrity-key-size $keylen --integrity-key-file /data/itr.key integrity_blk -
 
     # Open the device with default parameters
-    $integritysetup open --integrity-key-size $keylen --integrity-key-file /data/itr.key /dev/mmcblk1p4 ihome
+    $integritysetup open --integrity-key-size $keylen --integrity-key-file /data/itr.key integrity_blk ihome
     mkfs.ext4 -b 4096 /dev/mapper/ihome # Creating ext4 filesystem in authenticated block
     rm -rf /home 2>/dev/null            # Deleting old home
     mkdir -p /home                      # Creating mount point
@@ -47,7 +50,7 @@ keylen=4 # Currently supporting this only.
 
     cat >/usr/ihome.sh <<EOF
 #!/bin/bash
-$integritysetup open --integrity-key-size $keylen --integrity-key-file /data/itr.key /dev/mmcblk1p4 ihome
+$integritysetup open --integrity-key-size $keylen --integrity-key-file /data/itr.key integrity_blk ihome
 # Creating mount point
 mkdir -p /home
 # Mounting authenticated home dir
@@ -87,6 +90,52 @@ EOF
 
     ###################################################################################################
 } || echo Proceeding without creating authenticated home
+
+###################################################################################################
+#
+#       Script to create show-info
+#
+###################################################################################################
+
+cat >/usr/bin/show-info <<EOF
+#!/bin/bash
+# /usr/bin/show-info
+# Created by Daniel on 16.07.2020
+# Display secure boot status
+title="Secure Boot Info"
+sec_info="\\
+Version\n\\
+1. Uboot : \$(fw_printenv --version 2>&1 | cut -d'-' -f2 | cut -d' ' -f2)\n\\
+2. Kernel: \$(cut -d'-' -f1 /proc/version | cut -d' ' -f3)\n\\
+3. Mender: \$(mender -v | cut -f1)\n\\
+\n\\
+HAB Status\n\\
+1. Uboot : Authenticated\n\\
+2. Kernel: Authenticated\n\\
+\n\\
+Mender: Running with process ID \$(pidof mender)\\
+"
+clear
+whiptail \
+    --title "\$title" \
+    --msgbox "\$sec_info" \
+    18 50
+clear
+exit 0
+EOF
+
+chmod 100 /usr/bin/show-info
+
+if [ -f /etc/profile ]; then
+    cat >>/etc/profile <<EOF
+# Modified by Daniel on 16.07.2020
+# FILE exists and execute
+if [[ -x /usr/bin/show-info ]]; then
+  /usr/bin/show-info
+fi
+EOF
+fi
+###################################################################################################
 
 cat >/usr/bin/delete-service <<EOF
 #!/bin/bash
