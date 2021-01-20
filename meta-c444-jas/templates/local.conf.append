@@ -49,7 +49,7 @@ MENDER_STORAGE_TOTAL_SIZE_MB_imx8mq-itx-p-c444  = "512"
 
 # Optimization
 
-KERNEL_DEVICETREE = "freescale/imx8mq-itx-p-c444.dtb"
+KERNEL_DEVICETREE_imx8mq-itx-p-c444 = "freescale/imx8mq-itx-p-c444.dtb"
 
 # Vigiles is a vulnerability management tool that provides build-time Yocto CVE Analysis of target images
 # For more details: https://www.nxp.com/docs/en/user-guide/IMX_YOCTO_PROJECT_USERS_GUIDE.pdf
