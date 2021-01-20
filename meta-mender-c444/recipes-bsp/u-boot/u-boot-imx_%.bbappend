@@ -14,10 +14,6 @@ SRC_URI += "file://0004-Improve-boot-startup-time.patch"
 # | BOOTENV_SIZE                             | CONFIG_ENV_SIZE        |
 # | MENDER_UBOOT_STORAGE_DEVICE              | CONFIG_SYS_MMC_ENV_DEV |
 
-MENDER_UBOOT_ENV_STORAGE_DEVICE_OFFSET_1_imx8mmevk = "0x400000"
-BOOTENV_SIZE_imx8mmevk                             = "0x1000"
-MENDER_UBOOT_STORAGE_DEVICE_imx8mmevk             ?= "1"
-
 MENDER_UBOOT_ENV_STORAGE_DEVICE_OFFSET_1_imx8mq-itx-p-c444 = "0x400000"
 BOOTENV_SIZE_imx8mq-itx-p-c444                             = "0x5000"
 MENDER_UBOOT_STORAGE_DEVICE_imx8mq-itx-p-c444             ?= "1"
