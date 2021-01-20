@@ -56,7 +56,7 @@ index 99efda64d3..a26307587d 100644
 +#define ASCII_BYTES_PER_FUSE  8
 +#define DFLT_FUSE_BUFFER_SIZE (MAX_FUSES_PER_FETCH * ASCII_BYTES_PER_FUSE) 
 +#define DFLT_DEK_BUFFER_SIZE  (64)
-+#define DFLT_DEKBLOB_ADDR     0x40401000	// default address imx8mm-evk
++#define DFLT_DEKBLOB_ADDR     0x40401000	// default address imx8m
 +#define DFLT_DEKBLOB_KEYSIZE  128
 +#define DEKBLOB_SIZE_128      0x48
 +#define DEKBLOB_SIZE_192      0x50
