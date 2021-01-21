@@ -28,13 +28,13 @@ echo "BBLAYERS += \" \${BSPDIR}/sources/meta-mender/meta-mender-core \"" >>conf/
 cat ../sources/meta-mender-community/templates/local.conf.append >>conf/local.conf
 cat ../sources/meta-mender-community/meta-mender-c444/templates/local.conf.append >>conf/local.conf
 
-# Adding extra layer (meta-c444-jas)
+# Adding extra layer (meta-c444-bgn)
 # Unrelated to mender integration
 echo "" >>conf/bblayers.conf
 echo "# Custom layer to add HAB & DM-Crypt features" >>conf/bblayers.conf
-echo "BBLAYERS += \" \${BSPDIR}/sources/meta-mender-community/meta-c444-jas \"" >>conf/bblayers.conf
+echo "BBLAYERS += \" \${BSPDIR}/sources/meta-mender-community/meta-c444-bgn \"" >>conf/bblayers.conf
 
-cat ../sources/meta-mender-community/meta-c444-jas/templates/local.conf.append >>conf/local.conf
+cat ../sources/meta-mender-community/meta-c444-bgn/templates/local.conf.append >>conf/local.conf
 
 echo ""
 echo "Mender integration complete."

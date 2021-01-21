@@ -17,7 +17,7 @@ echo "Patching mender-part-images.bbclass"
 cd $CWD/sources/meta-mender/meta-mender-core/classes
 
 if ! grep -q "label primary" mender-part-images.bbclass; then
-    git apply $CWD/sources/meta-mender-community/meta-c444-jas/patches/named-mender-partition.patch
+    git apply $CWD/sources/meta-mender-community/meta-c444-bgn/patches/named-mender-partition.patch
     echo "Successfully added names to Mender partitions in sdimg"
 else
     echo "Patch already applied, no need to apply again!"

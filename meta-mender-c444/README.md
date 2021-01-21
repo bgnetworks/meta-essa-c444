@@ -15,7 +15,7 @@ URI: https://github.com/mendersoftware/meta-mender
 branch: zeus
 revision: HEAD
 
-URI: https://github.com/danie007/meta-mender-c444/tree/zeus/meta-c444-jas
+URI: https://github.com/bgnetworks/meta-mender-c444/tree/zeus/meta-c444-bgn
 branch: zeus
 revision: HEAD
 ```
@@ -31,7 +31,7 @@ repo init -u https://github.com/WinSystems/c444-manifest.git \
           -b master \
           -m itx-p-c444_5.4.24.xml
 
-wget --directory-prefix .repo/manifests https://raw.githubusercontent.com/danie007/meta-mender-c444/zeus/meta-mender-c444/scripts/c444_5.4.24_secure-mender-demo.xml
+wget --directory-prefix .repo/manifests https://raw.githubusercontent.com/bgnetworks/meta-mender-c444/zeus/meta-mender-c444/scripts/c444_5.4.24_secure-mender-demo.xml
 
 repo init -m c444_5.4.24_secure-mender-demo.xml
 repo sync

@@ -22,7 +22,9 @@ See the Guide for instructions on installing repo.
 
 ```bash
 repo init -u https://github.com/WinSystems/c444-manifest.git -b master -m itx-p-c444_5.4.24.xml
-wget --directory-prefix .repo/manifests https://raw.githubusercontent.com/danie007/meta-mender-c444/zeus/meta-mender-c444/scripts/c444_5.4.24_secure-mender-demo.xml
+
+# Only works on Public repository
+wget --directory-prefix .repo/manifests https://raw.githubusercontent.com/bgnetworks/meta-mender-c444/zeus/meta-mender-c444/scripts/c444_5.4.24_secure-mender-demo.xml
 repo init -m c444_5.4.24_secure-mender-demo.xml
 ```
 
@@ -138,7 +140,7 @@ To contribute to the development of this BSP and/or submit patches for new board
 
 - meta-mender-c444: files and configuration for mender integration with [PICO-ITX Single Board Computer with NXP® I.MX8M Processor](https://www.winsystems.com/product/itx-p-c444/)
   Path: sources/meta-mender-community/meta-mender-c444  
-  GIT: https://github.com/danie007/meta-mender-c444.git
+  GIT: https://github.com/bgnetworks/meta-mender-c444.git
 
 ## Maintainer
 
