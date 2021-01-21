@@ -47,6 +47,11 @@ MENDER_DATA_PART_SIZE_MB_imx8mq-itx-p-c444  = "32"
 # for details
 MENDER_STORAGE_TOTAL_SIZE_MB_imx8mq-itx-p-c444  = "512"
 
+# Uncomment and update the below line to enable bootloader signing (HAB Authentication)
+# SIGN_BL = "true"
+# Update the full path of the CST folder (It should contain the cst along with the certificates)
+# CST_DIR = ""
+
 # Optimization
 
 KERNEL_DEVICETREE_imx8mq-itx-p-c444 = "freescale/imx8mq-itx-p-c444.dtb"
