@@ -88,6 +88,17 @@ MENDER_UBOOT_STORAGE_DEVICE_imx8mq-itx-p-c444 = "0"
 ```
 
 - To change the splash image to v2 (default version 1) uncomment `SPLASH_IMG = "v2"`
+- To add HAB authentication uncomment and update the following,
+
+```bash
+
+# Uncomment and update the below line to enable bootloader signing (HAB Authentication)
+SIGN_BL = "true"
+# Update the full path of the CST folder (It should contain the cst along with the certificates)
+CST_DIR = "cst_dir_here"
+```
+
+- To get CVE report, uncomment `INHERIT += "vigiles"` line
 - To assign password to `root` user, delete `EXTRA_IMAGE_FEATURES ?= "debug-tweaks"` and uncomment the following lines:
 
 ```bash
