@@ -5,6 +5,7 @@
 IMXBOOT_TARGETS_append = " print_fit_hab"
 
 DISTRO_FEATURES_append = " busybox"
+MACHINE_FEATURES_append = " optee"
 
 # Uncomment below line to use v2 image in splash screen
 # Default image is v1 (This can be used to differentiate
