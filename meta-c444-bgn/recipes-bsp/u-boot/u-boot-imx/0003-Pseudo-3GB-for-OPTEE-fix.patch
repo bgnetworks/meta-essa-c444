@@ -1,0 +1,66 @@
+From ca48fc591d44072648c15a10cc077173ba155eca Mon Sep 17 00:00:00 2001
+From: danie007 <danilselvan@gmail.com>
+Date: Tue, 9 Feb 2021 18:53:57 +0530
+Subject: [PATCH] Pseudo 3GB for OPTEE fix
+
+Update RAM size in U-Boot as 3GB (instead of 4GB). This fixes OPTEE
+build error (don't know why tho - further debugging needed)
+
+NOTE: Temp fix (No one likes to waste 1GB RAM space)
+
+Signed-off-by: danie007 <danilselvan@gmail.com>
+---
+ arch/arm/dts/imx8mq-itx-p-c444.dts | 8 ++++----
+ arch/arm/mach-imx/imx8m/soc.c      | 4 ++--
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/arch/arm/dts/imx8mq-itx-p-c444.dts b/arch/arm/dts/imx8mq-itx-p-c444.dts
+index 3d8219804f..ea3e2aff07 100644
+--- a/arch/arm/dts/imx8mq-itx-p-c444.dts
++++ b/arch/arm/dts/imx8mq-itx-p-c444.dts
+@@ -16,19 +16,19 @@
+ 		bootargs = "console=ttymxc0,115200 earlycon=ec_imx6q,0x30860000,115200";
+ 		stdout-path = &uart1;
+ 	};
+-	/*
++
+ 	firmware {
+ 		optee {
+ 			compatible = "linaro,optee-tz";
+ 			method = "smc";
+ 		};
+ 	};
+-	/*
++
+ 	memory@40000000 {
+ 		device_type = "memory";
+-		reg = <0x00000000 0x40000000 0x1 0x00000000>;
++		reg = <0x00000000 0x40000000 0 0xc0000000>;
+ 	};
+-	*/
++
+ 	pcie0_refclk: pcie0-refclk {
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+diff --git a/arch/arm/mach-imx/imx8m/soc.c b/arch/arm/mach-imx/imx8m/soc.c
+index 3284ef013a..70e66a4fff 100644
+--- a/arch/arm/mach-imx/imx8m/soc.c
++++ b/arch/arm/mach-imx/imx8m/soc.c
+@@ -216,7 +216,7 @@ int dram_init(void)
+ 	if (val & 0x1)
+ 		sdram_size = 0x80000000; /* 2GB */
+ 	else
+-		sdram_size = 0x100000000; /* 4GB */
++		sdram_size = 0xc0000000; /* 3GB */
+ 
+ 	/* rom_pointer[1] contains the size of TEE occupies */
+ 	if (rom_pointer[1])
+@@ -243,7 +243,7 @@ int dram_init_banksize(void)
+ 	if (val & 0x1)
+ 		sdram_size = 0x80000000; /* 2GB */
+ 	else
+-		sdram_size = 0x100000000; /* 4GB */
++		sdram_size = 0xc0000000; /* 3GB */
+ 
+ 	gd->bd->bi_dram[bank].start = PHYS_SDRAM;
+ 	if (rom_pointer[1]) {

@@ -1,4 +1,4 @@
-IMAGE_FSTYPES_remove = "tar.bz2 ext4 sdcard.bz2 wic.bmap wic.bz2 uefiimg.bz2"
+IMAGE_FSTYPES_remove = "tar.bz2 ext4 sdcard.bz2 wic.bmap wic.bz2 uefiimg.bz2 sdimg.bmap mender.bmap"
 
 # dummy value as the WIC plugin requires an entry but this will not be used
 # for anything beside to satisfy the build dependency

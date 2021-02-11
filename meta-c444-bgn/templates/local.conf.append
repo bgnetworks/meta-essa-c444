@@ -45,20 +45,17 @@ MENDER_DATA_PART_SIZE_MB_imx8mq-itx-p-c444  = "32"
 # Total size of the medium that mender partitioned images will be written to, expressed in MB
 # See https://docs.mender.io/1.5/artifacts/variables#mender_storage_total_size_mb
 # for details
-MENDER_STORAGE_TOTAL_SIZE_MB_imx8mq-itx-p-c444  = "512"
+MENDER_STORAGE_TOTAL_SIZE_MB_imx8mq-itx-p-c444  = "600"
 
-# Uncomment and update the below line to enable bootloader signing (HAB Authentication)
-# SIGN_BL = "true"
+# Uncomment and update the below line to enable bootloader & kernel signing (HAB Authentication)
+# HAB_SIGN_BL = "true"
+# HAB_SIGN_KERNEL = "true"
 # Update the full path of the CST folder (It should contain the cst along with the certificates)
 # CST_DIR = ""
 
 # Optimization
 
 KERNEL_DEVICETREE_imx8mq-itx-p-c444 = "freescale/imx8mq-itx-p-c444.dtb"
-
-# Vigiles is a vulnerability management tool that provides build-time Yocto CVE Analysis of target images
-# For more details: https://www.nxp.com/docs/en/user-guide/IMX_YOCTO_PROJECT_USERS_GUIDE.pdf
-# INHERIT += "vigiles"
 
 # Removing Unused Packages from the image
 IMAGE_INSTALL_remove += " \

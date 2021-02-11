@@ -22,7 +22,7 @@ keylen=4 # Currently supporting this only.
 integrity_blk="/dev/mmcblk1p4" # For SD Card
 # integrity_blk="/dev/mmcblk0p4" # For eMMC
 
-[ -e integrity_blk ] && {
+[ -e $integrity_blk ] && {
     # (Optional) unmounting & closing the authenticated block
     umount /home
     $integritysetup close ihome
@@ -36,10 +36,10 @@ integrity_blk="/dev/mmcblk1p4" # For SD Card
     chmod 400 /data/itr.key
 
     # Format the device with default standalone mode (CRC32C)
-    echo -n "YES" | $integritysetup format --integrity-key-size $keylen --integrity-key-file /data/itr.key integrity_blk -
+    echo -n "YES" | $integritysetup format --integrity-key-size $keylen --integrity-key-file /data/itr.key $integrity_blk -
 
     # Open the device with default parameters
-    $integritysetup open --integrity-key-size $keylen --integrity-key-file /data/itr.key integrity_blk ihome
+    $integritysetup open --integrity-key-size $keylen --integrity-key-file /data/itr.key $integrity_blk ihome
     mkfs.ext4 -b 4096 /dev/mapper/ihome # Creating ext4 filesystem in authenticated block
     rm -rf /home 2>/dev/null            # Deleting old home
     mkdir -p /home                      # Creating mount point
@@ -50,7 +50,7 @@ integrity_blk="/dev/mmcblk1p4" # For SD Card
 
     cat >/usr/ihome.sh <<EOF
 #!/bin/bash
-$integritysetup open --integrity-key-size $keylen --integrity-key-file /data/itr.key integrity_blk ihome
+$integritysetup open --integrity-key-size $keylen --integrity-key-file /data/itr.key $integrity_blk ihome
 # Creating mount point
 mkdir -p /home
 # Mounting authenticated home dir

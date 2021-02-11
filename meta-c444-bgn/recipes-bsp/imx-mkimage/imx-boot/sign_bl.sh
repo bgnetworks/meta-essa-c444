@@ -137,6 +137,12 @@ atf_of=${fit_hab[7]}
 atf_ln=${fit_hab[8]}
 
 echo $atf_st $atf_of $atf_ln
+
+tee_st=${fit_hab[9]}
+tee_of=${fit_hab[10]}
+tee_ln=${fit_hab[11]}
+
+echo $tee_st $tee_of $tee_ln
 echo "#######################################################"
 
 read -r -d '' CSF_COMMON_TXT <<EOM
@@ -197,7 +203,8 @@ $CSF_COMMON_TXT
     # Authenticate Start Address, Offset, Length and file
     Blocks = $fit_st $fit_of $fit_ln "$BOOT_IMG", \\
              $ubt_st $ubt_of $ubt_ln "$BOOT_IMG", \\
-             $atf_st $atf_of $atf_ln "$BOOT_IMG"
+             $atf_st $atf_of $atf_ln "$BOOT_IMG", \\
+             $tee_st $tee_of $tee_ln "$BOOT_IMG"
 EOT
 
 # Removing old data, if any
