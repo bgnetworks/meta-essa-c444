@@ -77,7 +77,12 @@ MACHINE=imx8mq-itx-p-c444 DISTRO=c444-xwayland source c444-setup-mender.sh -b bu
 Open `conf/local.conf` in your favorite editor and configure it as follows (these configurations are verified for this repo build)
 
 - Delete `EXTRA_IMAGE_FEATURES += "package-management"` line
-- Paste your `MENDER_TENANT_TOKEN` on the placeholder (steps given on)
+- Paste your `MENDER_TENANT_TOKEN` on the placeholder
+  **To get your tenant token:**
+  - log in to https://hosted.mender.io
+  - click your email at the top right and then "My organization"
+  - press the "COPY TO CLIPBOARD"
+  - assign content of clipboard to MENDER_TENANT_TOKEN
 
 **Optional configurations:**
 
