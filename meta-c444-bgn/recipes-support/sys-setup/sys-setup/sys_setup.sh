@@ -174,6 +174,9 @@ delete-service klogd.service
 delete-service alsa-restore.service
 delete-service ofono.service
 
+# Deleting the script-delete script
+rm -f /usr/bin/delete-service
+
 echo ""
 
 # Restarting
