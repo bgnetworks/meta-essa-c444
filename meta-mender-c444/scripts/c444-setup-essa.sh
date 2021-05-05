@@ -22,19 +22,19 @@
 
 echo "" >>conf/bblayers.conf
 echo "# Mender integration layers" >>conf/bblayers.conf
-echo "BBLAYERS += \" \${BSPDIR}/sources/meta-mender-community/meta-bgn-essa \"" >>conf/bblayers.conf
+echo "BBLAYERS += \" \${BSPDIR}/sources/meta-bgn-essa/meta-mender-c444 \"" >>conf/bblayers.conf
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-mender/meta-mender-core \"" >>conf/bblayers.conf
 
-cat ../sources/meta-mender-community/templates/local.conf.append >>conf/local.conf
-cat ../sources/meta-mender-community/meta-bgn-essa/templates/local.conf.append >>conf/local.conf
+cat ../sources/meta-bgn-essa/templates/local.conf.append >>conf/local.conf
+cat ../sources/meta-bgn-essa/meta-mender-c444/templates/local.conf.append >>conf/local.conf
 
 # Adding extra layer (meta-essa-c444)
 # Unrelated to mender integration
 echo "" >>conf/bblayers.conf
 echo "# Custom layer to add HAB & DM-Crypt features" >>conf/bblayers.conf
-echo "BBLAYERS += \" \${BSPDIR}/sources/meta-mender-community/meta-essa-c444 \"" >>conf/bblayers.conf
+echo "BBLAYERS += \" \${BSPDIR}/sources/meta-bgn-essa/meta-essa-c444 \"" >>conf/bblayers.conf
 
-cat ../sources/meta-mender-community/meta-essa-c444/templates/local.conf.append >>conf/local.conf
+cat ../sources/meta-bgn-essa/meta-essa-c444/templates/local.conf.append >>conf/local.conf
 
 echo ""
 echo "Mender integration complete."

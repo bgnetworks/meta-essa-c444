@@ -1,4 +1,4 @@
-# meta-bgn-essa
+# meta-mender-c444
 
 Mender integration for WinSystems boards
 
@@ -31,12 +31,12 @@ repo init -u https://github.com/WinSystems/c444-manifest.git \
           -b master \
           -m itx-p-c444_5.4.24.xml
 
-wget --directory-prefix .repo/manifests https://raw.githubusercontent.com/bgnetworks/meta-bgn-essa/zeus/meta-bgn-essa/scripts/c444_5.4.24_secure-mender-demo.xml
+wget --directory-prefix .repo/manifests https://raw.githubusercontent.com/bgnetworks/meta-bgn-essa/zeus/meta-mender-c444/scripts/c444_5.4.24-essa-demo.xml
 
-repo init -m c444_5.4.24_secure-mender-demo.xml
+repo init -m c444_5.4.24-essa-demo.xml
 repo sync
 
-MACHINE=imx8mq-itx-p-c444 DISTRO=c444-xwayland source c444-setup-mender.sh -b build
+MACHINE=imx8mq-itx-p-c444 DISTRO=c444-xwayland source c444-setup-essa.sh -b build
 bitbake core-image-base
 ```
 

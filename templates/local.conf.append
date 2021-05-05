@@ -1,5 +1,5 @@
 
-# Appended fragment from meta-mender-community/templates
+# Appended fragment from meta-bgn-essa/templates
 
 # The name of the disk image and Artifact that will be built.
 # This is what the device will report that it is running, and different updates

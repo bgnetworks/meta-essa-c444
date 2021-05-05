@@ -1,5 +1,5 @@
 
-# Appended fragment from meta-mender-community/meta-8mm/templates
+# Appended fragment from meta-bgn-essa/meta-essa-c444/templates
 # Optimized build template
 
 IMXBOOT_TARGETS_append = " print_fit_hab"
