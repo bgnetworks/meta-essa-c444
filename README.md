@@ -2,9 +2,9 @@
      Author: Daniel Selvan, Jasmin Infotech
 -->
 
-# meta-mender-c444
+# meta-bgn-essa
 
-This repository is based on [WinSystems/c444-manifest](https://github.com/WinSystems/c444-manifest/tree/master) (_5.4.24 release_) and enables [Mender](https://mender.io/) on WINSYSTEM's [ITX-P-C444](https://www.winsystems.com/product/itx-p-c444/).
+This repository is based on [WinSystems/c444-manifest](https://github.com/WinSystems/c444-manifest/tree/master) (_5.4.24 release_) and enables [Mender](https://mender.io/) OTA and NXP's HAB features on WINSYSTEM's [ITX-P-C444](https://www.winsystems.com/product/itx-p-c444/).
 
 ## Supported board
 
@@ -24,7 +24,7 @@ See the Guide for instructions on installing repo.
 repo init -u https://github.com/WinSystems/c444-manifest.git -b master -m itx-p-c444_5.4.24.xml
 
 # Only works on Public repository
-wget --directory-prefix .repo/manifests https://raw.githubusercontent.com/bgnetworks/meta-mender-c444/zeus/meta-mender-c444/scripts/c444_5.4.24_secure-mender-demo.xml
+wget --directory-prefix .repo/manifests https://raw.githubusercontent.com/bgnetworks/meta-bgn-essa/zeus/meta-bgn-essa/scripts/c444_5.4.24_secure-mender-demo.xml
 repo init -m c444_5.4.24_secure-mender-demo.xml
 ```
 
@@ -143,9 +143,9 @@ bitbake core-image-base
 
 To contribute to the development of this BSP and/or submit patches for new boards please send the patches as bellow:
 
-- meta-mender-c444: files and configuration for mender integration with [PICO-ITX Single Board Computer with NXP® I.MX8M Processor](https://www.winsystems.com/product/itx-p-c444/)
-  Path: sources/meta-mender-community/meta-mender-c444  
-  GIT: https://github.com/bgnetworks/meta-mender-c444.git
+- meta-bgn-essa: files and configuration for mender integration with [PICO-ITX Single Board Computer with NXP® I.MX8M Processor](https://www.winsystems.com/product/itx-p-c444/)
+  Path: sources/meta-mender-community/meta-bgn-essa  
+  GIT: https://github.com/bgnetworks/meta-bgn-essa.git
 
 ## Maintainer
 
