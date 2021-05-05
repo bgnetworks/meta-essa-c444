@@ -10,8 +10,6 @@ This repository is based on [WinSystems/c444-manifest](https://github.com/WinSys
 
 ## Supported board
 
-**NOTE**: This is release is not a production release.
-
 The following board is the only board tested in this release.
 
 - WINSYSTEM ITX-P-C444 (imx8mq-itx-p-c444) - [ITX-P-C444](https://www.winsystems.com/product/itx-p-c444/)
@@ -20,7 +18,7 @@ The following board is the only board tested in this release.
 
 See the Guide for instructions on installing repo.
 
-1. Install the WinSystems Linux BSP & mender repo
+#### 1. Install the WinSystems Linux BSP & BGN-ESSA repo
 
 ```bash
 repo init -u https://github.com/WinSystems/c444-manifest.git -b master -m itx-p-c444_5.4.24.xml
@@ -29,6 +27,8 @@ repo init -u https://github.com/WinSystems/c444-manifest.git -b master -m itx-p-
 wget --directory-prefix .repo/manifests https://raw.githubusercontent.com/bgnetworks/meta-bgn-essa/zeus/meta-mender-c444/scripts/c444_5.4.24-essa-demo.xml
 repo init -m c444_5.4.24-essa-demo.xml
 ```
+
+**NOTE**: _Use_ `c444-setup-essa.sh` _script for initialization._
 
 #### 2. Build
 
@@ -40,7 +40,13 @@ bitbake core-image-base
 
 **core-image-base**: "A console-only image that fully supports the target device hardware."
 
+## Detailed Guide
+
+To know more about the BG Networks ESSA and its potential capabilities, contact BG Networks. (link to be included)
+
 ## Contributing
+
+> If community changes are not required, we can mention that in here and remove the maintainer section.
 
 To contribute to the development of this BSP and/or submit patches for new boards please send the patches as bellow:
 

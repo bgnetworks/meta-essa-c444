@@ -22,25 +22,11 @@ revision: HEAD
 
 ## Quick start
 
-The following commands will setup the environment and allow you to build images
-that have Mender integrated.
-
-```bash
-mkdir mender-c444 && cd mender-c444
-repo init -u https://github.com/WinSystems/c444-manifest.git \
-          -b master \
-          -m itx-p-c444_5.4.24.xml
-
-wget --directory-prefix .repo/manifests https://raw.githubusercontent.com/bgnetworks/meta-bgn-essa/zeus/meta-mender-c444/scripts/c444_5.4.24-essa-demo.xml
-
-repo init -m c444_5.4.24-essa-demo.xml
-repo sync
-
-MACHINE=imx8mq-itx-p-c444 DISTRO=c444-xwayland source c444-setup-essa.sh -b build
-bitbake core-image-base
-```
+Refer [README](../README.md)
 
 ## Maintainer
+
+> To be removed, if no external contribution is allowed.
 
 The author(s) and maintainer(s) of this layer are:
 
