@@ -15,7 +15,7 @@ URI: https://github.com/mendersoftware/meta-mender
 branch: zeus
 revision: HEAD
 
-URI: https://github.com/bgnetworks/meta-mender-c444/tree/zeus/meta-c444-bgn
+URI: https://github.com/bgnetworks/meta-mender-c444/tree/zeus/meta-essa-c444
 branch: zeus
 revision: HEAD
 ```

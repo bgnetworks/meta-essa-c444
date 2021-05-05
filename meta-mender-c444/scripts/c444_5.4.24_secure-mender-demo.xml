@@ -9,7 +9,7 @@
     <project name="meta-mender" remote="mender" revision="zeus" path="sources/meta-mender" />
     <project name="meta-mender-c444" remote="bgnetworks" revision="zeus" path="sources/meta-mender-community">
         <linkfile src="meta-mender-c444/scripts/c444-setup-mender.sh" dest="c444-setup-mender.sh" />
-        <linkfile src="meta-c444-bgn/scripts/name-partition.sh" dest="name-partition.sh" />
+        <linkfile src="meta-essa-c444/scripts/name-partition.sh" dest="name-partition.sh" />
     </project>
 
 </manifest>
