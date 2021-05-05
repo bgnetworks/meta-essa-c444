@@ -5,8 +5,12 @@
 # Added check to determine if the patch was already applied
 #
 # Author: Daniel Selvan D
-# Organization: Jasmin Infotech
-# 23.11.2020
+# Copyright (c) 2021 BG Networks, Inc.
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
 #
 
 CWD=$(pwd)

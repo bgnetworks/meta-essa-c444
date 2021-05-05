@@ -9,6 +9,7 @@
 #
 # Added 1 s timeout for the network online service
 # Edited by Daniel Selvan D, Jasmin Infotech on 20.01.2021
+# Copyright (c) 2021 BG Networks, Inc.
 
 [Unit]
 Description=Wait for Network to be Configured

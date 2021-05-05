@@ -1,3 +1,14 @@
+<!-- File: README.md
+     Author: Daniel Selvan, Jasmin Infotech
+# Copyright (c) 2021 BG Networks, Inc.
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+-->
+
 # meta-mender-c444
 
 Mender integration for WinSystems boards
