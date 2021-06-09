@@ -1,21 +1,18 @@
-<!-- File: README.md
-     Author: Daniel Selvan, Jasmin Infotech
+<!-- 
+# File: README.md
+# Author: Daniel Selvan, Jasmin Infotech
 # Copyright (c) 2021 BG Networks, Inc.
 #
-# This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 2 of the License, or
-# (at your option) any later version.
-#
+# See LICENSE file for license details.
 -->
 
 # meta-bgn-essa
 
-[BG Network](https://bgnet.works/)’s Embedded Security Software Architecture (ESSA), a collection of scripts, recipes, configurations, and documentation for Linux, enhances cybersecurity for IoT devices, including secure boot, encryption, authentication, and secure software updates. The ESSA enables engineers to extend a hardware root of trust to secure U-Boot, the Linux kernel, and applications in the root file system.
+[BG Network's](https://bgnet.works/) [Embedded Security Software Architecture](https://bgnet.works/embedded-security-software-architecture/) (ESSA), a collection of scripts, recipes, configurations, and documentation for Linux, enhances cybersecurity for IoT devices, including secure boot, encryption, authentication, and secure software updates. The ESSA enables engineers to extend a hardware root of trust to secure U-Boot, the Linux kernel, and applications in the root file system.
 
-This repository is based on [WinSystems/c444-manifest](https://github.com/WinSystems/c444-manifest/tree/master) (_5.4.24 release_) and enables [Mender](https://mender.io/) OTA and NXP's HAB features on WINSYSTEM's [ITX-P-C444](https://www.winsystems.com/product/itx-p-c444/).
+This repository is based on [WinSystems/c444-manifest](https://github.com/WinSystems/c444-manifest/tree/master) (_5.4.24 release_) and enables [Mender](https://mender.io/) OTA and NXP's HAB features on WINSYSTEM's [ITX-P-C444](https://www.winsystems.com/product/itx-p-c444/) hardware.
 
-## Supported board
+## Supported Boards
 
 The following board is the only board tested in this release.
 
@@ -23,7 +20,7 @@ The following board is the only board tested in this release.
 
 ## Quick Start Guide
 
-See the Guide for instructions on installing repo.
+See the Quick Start Guide for instructions on installing repo.
 
 #### 1. Install the WinSystems Linux BSP & BGN-ESSA repo
 
@@ -49,22 +46,15 @@ bitbake core-image-base
 
 ## Detailed Guide
 
-To know more about the BG Networks ESSA and its potential capabilities, contact BG Networks. (link to be included)
+To know more about the BG Networks ESSA and its potential capabilities, [contact BG Networks](https://bgnet.works/contact-us).
 
 ## Contributing
 
-> If community changes are not required, we can mention that in here and remove the maintainer section.
+To contribute to the development of this BSP and/or submit patches for new boards please feel free to [create pull requests](https://github.com/bgnetworks/meta-bgn-essa/pulls).
 
-To contribute to the development of this BSP and/or submit patches for new boards please send the patches as bellow:
-
-- meta-bgn-essa: files and configuration for mender integration with [PICO-ITX Single Board Computer with NXP® I.MX8M Processor](https://www.winsystems.com/product/itx-p-c444/)
-  Path: sources/meta-bgn-essa/meta-mender-c444
-  GIT: https://github.com/bgnetworks/meta-bgn-essa.git
-
-## Maintainer
+## Maintainer(s)
 
 The author(s) and maintainer(s) of this layer is(are):
 
 - Daniel Selvan D - <daniel.selvan@jasmin-infotech.com> - [danie007](https://github.com/danie007)
 
-Always include the maintainers when suggesting code changes to this layer.
