@@ -8,7 +8,7 @@
 
     <project name="meta-mender" remote="mender" revision="zeus" path="sources/meta-mender" />
     <project name="meta-bgn-essa" remote="bgnetworks" revision="zeus" path="sources/meta-bgn-essa">
-        <linkfile src="meta-bgn-essa/scripts/c444-setup-essa.sh" dest="c444-setup-essa.sh" />
+        <linkfile src="meta-essa-c444/scripts/c444-setup-essa.sh" dest="c444-setup-essa.sh" />
         <linkfile src="meta-essa-c444/scripts/name-partition.sh" dest="name-partition.sh" />
     </project>
 
