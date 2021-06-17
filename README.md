@@ -26,8 +26,6 @@ See the Quick Start Guide for instructions on installing repo.
 
 ```bash
 repo init -u https://github.com/WinSystems/c444-manifest.git -b master -m itx-p-c444_5.4.24.xml
-
-# Only works on Public repository
 wget --directory-prefix .repo/manifests https://raw.githubusercontent.com/bgnetworks/meta-bgn-essa/zeus/meta-mender-c444/scripts/c444_5.4.24-essa-demo.xml
 repo init -m c444_5.4.24-essa-demo.xml
 ```

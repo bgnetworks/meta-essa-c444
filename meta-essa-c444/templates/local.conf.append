@@ -46,7 +46,7 @@ MENDER_DATA_PART_SIZE_MB_imx8mq-itx-p-c444  = "32"
 # Total size of the medium that mender partitioned images will be written to, expressed in MB
 # See https://docs.mender.io/1.5/artifacts/variables#mender_storage_total_size_mb
 # for details
-MENDER_STORAGE_TOTAL_SIZE_MB_imx8mq-itx-p-c444  = "600"
+MENDER_STORAGE_TOTAL_SIZE_MB_imx8mq-itx-p-c444  = "686000"
 
 # Uncomment and update the below line to enable bootloader & kernel signing (HAB Authentication)
 # HAB_SIGN_BL = "true"
