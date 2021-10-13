@@ -10,7 +10,7 @@
 
 [BG Network's](https://bgnet.works/) [Embedded Security Software Architecture](https://bgnet.works/embedded-security-software-architecture/) (ESSA), a collection of scripts, recipes, configurations, and documentation for Linux, enhances cybersecurity for IoT devices, including secure boot, encryption, authentication, and secure software updates. The ESSA enables engineers to extend a hardware root of trust to secure U-Boot, the Linux kernel, and applications in the root file system.
 
-This repository is based on [WinSystems/c444-manifest](https://github.com/WinSystems/c444-manifest/tree/master) (_5.4.24 release_) and enables [Mender](https://mender.io/) OTA and NXP's HAB features on WINSYSTEM's [ITX-P-C444](https://www.winsystems.com/product/itx-p-c444/) hardware.
+This repository is based on [WinSystems/c444-manifest](https://github.com/bgnetworks/c444-manifest/tree/master) (_5.4.47 release_) and enables [Mender](https://mender.io/) OTA and NXP's HAB features on WINSYSTEM's [ITX-P-C444](https://www.winsystems.com/product/itx-p-c444/) hardware.
 
 ## Supported Boards
 
@@ -25,9 +25,9 @@ See the Quick Start Guide for instructions on installing repo.
 #### 1. Install the WinSystems Linux BSP & BGN-ESSA repo
 
 ```bash
-repo init -u https://github.com/WinSystems/c444-manifest.git -b master -m itx-p-c444_5.4.24.xml
-wget --directory-prefix .repo/manifests https://raw.githubusercontent.com/bgnetworks/meta-bgn-essa/zeus/meta-mender-c444/scripts/c444_5.4.24-essa-demo.xml
-repo init -m c444_5.4.24-essa-demo.xml
+repo init -u https://github.com/bgnetworks/c444-manifest.git -b master -m itx-p-c444_5.4.47.xml
+wget --directory-prefix .repo/manifests https://raw.githubusercontent.com/bgnetworks/meta-bgn-essa/zeus-w-caam/meta-mender-c444/scripts/c444_5.4.47-essa-demo.xml
+repo init -m c444_5.4.47-essa-demo.xml
 ```
 
 **NOTE**: _Use_ `c444-setup-essa.sh` _script for initialization._

@@ -58,13 +58,9 @@ MENDER_STORAGE_TOTAL_SIZE_MB_imx8mq-itx-p-c444  = "680"
 
 KERNEL_DEVICETREE_imx8mq-itx-p-c444 = "freescale/imx8mq-itx-p-c444.dtb"
 
-# Removing Unused Packages from the image
+# Removing unused packages from the image
+# Disabling test utilities
 IMAGE_INSTALL_remove += " \
-    perl5 \
-    sqlite3 \
-    bluez5 \
-    python \
-    python3 \
     packagegroup-fsl-tools-testapps \
     wic-tools \
     "
@@ -75,24 +71,48 @@ DISTRO_FEATURES_remove += " \
     wifi \
     3g \
     opengl \
+    wayland \
     x11 \
     nfc \
     nfs \
+    etx2 \
+    ext3 \
+    jffs2 \
     alsa \
-    alsa-utils \
+    btrfs \
+    touchscreen \
+    wic-tools \
+    lttng-modules \
+    dbus-test \
+    gnome-desktop-testing \
+    acl \
+    argp \
     ext2 \
     ipv6 \
-    largefile \
-    pcmcia \
-    xattr \
-    ptest \
+    pci \
+    3g \
     vulkan \
     jailhouse \
-    linux-factory \
-    pam \
     pulseaudio \
-    coreutils \
-    shadow \
+    "
+
+# Removing Unused Packages from the image
+PACKAGE_EXCLUDE = " \
+    perl5 \
+    sqlite3 \
+    bluez3 \
+    bluez4\
+    bluez5\
+    wic-tools \
+    btrfs-tools \
+    lttng-modules \
+    dbus-test \
+    gnome-desktop-testing \
+    "
+
+MACHINE_EXTRA_RRECOMMENDS_remove += " \
+    nxp-wlan-sdk \
+    imx-m4-demos \
     "
 
 # Setting the root password as toor

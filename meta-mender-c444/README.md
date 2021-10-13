@@ -19,15 +19,15 @@ The supported and tested board is:
 
 ## Dependencies
 
-This layer depends on WinSys BSP `itx-p-c444_5.4.24` as well as
+This layer depends on WinSys BSP `itx-p-c444_5.4.47` as well as
 
 ```
 URI: https://github.com/mendersoftware/meta-mender
-branch: zeus
+branch: zeus-w-caam
 revision: HEAD
 
-URI: https://github.com/bgnetworks/meta-bgn-essa/tree/zeus/meta-essa-c444
-branch: zeus
+URI: https://github.com/bgnetworks/meta-bgn-essa/tree/zeus-w-caam/meta-essa-c444
+branch: zeus-w-caam
 revision: HEAD
 ```
 
