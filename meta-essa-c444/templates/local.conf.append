@@ -48,12 +48,6 @@ MENDER_DATA_PART_SIZE_MB_imx8mq-itx-p-c444  = "32"
 # for details
 MENDER_STORAGE_TOTAL_SIZE_MB_imx8mq-itx-p-c444  = "680"
 
-# Uncomment and update the below line to enable bootloader & kernel signing (HAB Authentication)
-# HAB_SIGN_BL = "true"
-# HAB_SIGN_KERNEL = "true"
-# Update the full path of the CST folder (It should contain the cst along with the certificates)
-# CST_DIR = ""
-
 # Optimization
 
 KERNEL_DEVICETREE_imx8mq-itx-p-c444 = "freescale/imx8mq-itx-p-c444.dtb"
@@ -123,3 +117,7 @@ MACHINE_EXTRA_RRECOMMENDS_remove += " \
 # Replace $HOME with your home directory
 # DL_DIR = "$HOME/.yocto/downloads/"
 # SSTATE_DIR = "$HOME/.yocto/sstate-cache/"
+
+# Uncompressed image, may consume more space
+# Uncomment if required (to be used by UUU tool)
+# IMAGE_FSTYPES += "wic"
