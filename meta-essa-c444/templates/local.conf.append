@@ -31,7 +31,7 @@ IMAGE_INSTALL_append = " \
     busybox \
     "
 
-IMAGE_OVERHEAD_FACTOR = "1.2"
+IMAGE_OVERHEAD_FACTOR = "5"
 
 # Disabling mender's data grow service (extend the image to fully occupy SD card)
 MENDER_FEATURES_DISABLE_append = " mender-growfs-data"
@@ -46,7 +46,7 @@ MENDER_DATA_PART_SIZE_MB_imx8mq-itx-p-c444  = "32"
 # Total size of the medium that mender partitioned images will be written to, expressed in MB
 # See https://docs.mender.io/1.5/artifacts/variables#mender_storage_total_size_mb
 # for details
-MENDER_STORAGE_TOTAL_SIZE_MB_imx8mq-itx-p-c444  = "680"
+MENDER_STORAGE_TOTAL_SIZE_MB_imx8mq-itx-p-c444  = "2000"
 
 # Optimization
 
@@ -117,7 +117,3 @@ MACHINE_EXTRA_RRECOMMENDS_remove += " \
 # Replace $HOME with your home directory
 # DL_DIR = "$HOME/.yocto/downloads/"
 # SSTATE_DIR = "$HOME/.yocto/sstate-cache/"
-
-# Uncompressed image, may consume more space
-# Uncomment if required (to be used by UUU tool)
-# IMAGE_FSTYPES += "wic"
