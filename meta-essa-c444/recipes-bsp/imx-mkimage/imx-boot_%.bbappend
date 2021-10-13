@@ -8,6 +8,8 @@
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
+LOGDIR ?= "${WORKDIR}/temp"
+
 do_compile() {
     compile_${SOC_FAMILY}
 
@@ -27,4 +29,9 @@ do_compile() {
             cp ${BOOT_STAGING}/flash.bin ${S}/${BOOT_CONFIG_MACHINE}-${target}
         fi
     done
+}
+
+do_deploy_append() {
+    bbnote "Copying compilation log to deploy directory (for signing with BGN-SAT)"
+    install -m 0644 ${LOGDIR}/log.do_compile ${DEPLOYDIR}/compile.log
 }
