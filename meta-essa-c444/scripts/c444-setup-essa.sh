@@ -14,8 +14,8 @@
 
 echo "" >>conf/bblayers.conf
 echo "# Mender integration layers" >>conf/bblayers.conf
-echo "BBLAYERS += \" \${BSPDIR}/sources/meta-bgn-essa/meta-mender-c444 \"" >>conf/bblayers.conf
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-mender/meta-mender-core \"" >>conf/bblayers.conf
+echo "BBLAYERS += \" \${BSPDIR}/sources/meta-bgn-essa/meta-mender-c444 \"" >>conf/bblayers.conf
 
 cat ../sources/meta-bgn-essa/templates/local.conf.append >>conf/local.conf
 cat ../sources/meta-bgn-essa/meta-mender-c444/templates/local.conf.append >>conf/local.conf
