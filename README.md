@@ -46,6 +46,42 @@ bitbake core-image-base
 
 To know more about the BG Networks ESSA and its potential capabilities, [contact BG Networks](https://bgnet.works/contact-us).
 
+## DM-Crypt with CAAM Black keys
+
+Execute the following commands on the `ITX-P-C444` console for a quick demo of **DM-Crypt with CAAM's black key** support
+
+```bash
+caam-keygen create randomkey ecb -s 16
+cat /data/caam/randomkey | keyctl padd logon logkey: @s
+keyctl list @s
+
+dd if=/dev/zero of=encrypted.img bs=1M count=32
+losetup /dev/loop0 encrypted.img
+
+dmsetup -v create encrypted --table "0 $(blockdev --getsz /dev/loop0) crypt capi:tk(cbc(aes))-plain :36:logon:logkey: 0 /dev/loop0 0 1 sector_size:512"
+dmsetup table --showkey encrypted
+
+mkfs.ext4 /dev/mapper/encrypted
+mkdir /mnt/encrypted
+mount -t ext4 /dev/mapper/encrypted /mnt/encrypted/
+
+echo "This is a test of disk encryption on WINSYSTEMS ITX-P-C444" > /mnt/encrypted/readme.txt
+umount /mnt/encrypted/
+dmsetup remove encrypted
+reboot
+
+caam-keygen import /data/caam/randomkey.bb importKey
+cat /data/caam/importKey | keyctl padd logon dmkey @s
+rm -f /data/caam/importKey
+
+losetup /dev/loop0 encrypted.img
+dmsetup -v create encrypted --table "0 $(blockdev --getsz /dev/loop0) crypt capi:tk(cbc(aes))-plain :36:logon:dmkey: 0 /dev/loop0 0 1 sector_size:512"
+dmsetup status encrypted
+
+mount /dev/mapper/encrypted /mnt/encrypted/
+cat /mnt/encrypted/readme.txt
+```
+
 ## Contributing
 
 To contribute to the development of this BSP and/or submit patches for new boards please feel free to [create pull requests](https://github.com/bgnetworks/meta-bgn-essa/pulls).
