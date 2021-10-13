@@ -91,4 +91,5 @@ To contribute to the development of this BSP and/or submit patches for new board
 The author(s) and maintainer(s) of this layer is(are):
 
 - Daniel Selvan D - <daniel.selvan@jasmin-infotech.com> - [danie007](https://github.com/danie007)
+- Glen Anderson - [hellbent](https://github.com/hellbent)
 
