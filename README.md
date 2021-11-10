@@ -8,7 +8,7 @@
 
 [BG Network's](https://bgnet.works/) [Embedded Security Software Architecture](https://bgnet.works/embedded-security-software-architecture/) (ESSA), a collection of scripts, recipes, configurations, and documentation for Linux, enhances cybersecurity for IoT devices, including secure boot, encryption, authentication, and secure software updates. The ESSA enables engineers to extend a hardware root of trust to secure U-Boot, the Linux kernel, and applications in the root file system.
 
-To provide strong cybersecurity without compromising performance or functionality, this architecture leverage:
+To provide strong cybersecurity without compromising performance or functionality, this architecture leverages:
 
 - In-silicon cryptographic accelerators and secure memory
 - Over-The-Air (OTA) software update solution from open-source and trusted partners
@@ -35,7 +35,7 @@ The following board is the only board tested in this release.
 
 ## Quick Start Guide
 
-See the Quick Start Guide for instructions of building core image and for a quick demo of **DM-Crypt with CAAM's black key**.
+See the [Quick Start Guide](docs/Quick Start Guide.pdf) for instructions of building core image and for a quick demo of **DM-Crypt with CAAM's black key**.
 
 ## Detailed Guide
 
