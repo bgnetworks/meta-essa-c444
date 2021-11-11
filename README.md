@@ -35,7 +35,7 @@ The following board is the only board tested in this release.
 
 ## Quick Start Guide
 
-See the [Quick Start Guide](docs/Quick_Start_Guide.pdf) for instructions of building core image and for a quick demo of **DM-Crypt with CAAM's black key**.
+See the [Quick Start Guide](docs/Quick_Start_Guide.md) for instructions of building core image and for a quick demo of **DM-Crypt with CAAM's black key**.
 
 ## Detailed Guide
 
