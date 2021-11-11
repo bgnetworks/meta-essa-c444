@@ -1,4 +1,10 @@
-﻿# 1. System Requirements
+<!--
+# File: Quick_Start_Guide.md
+# Copyright (c) 2021 BG Networks, Inc.
+# See LICENSE file for license details.
+-->
+
+# 1. System Requirements
 
 [BG Networks](https://bgnet.works/)' Embedded Security Software Architecture ([ESSA](https://bgnet.works/security-automation-tools-overview/embedded-security-software-architecture/)) is a Yocto-based solution. The build has been tested with `Ubuntu 20.04 (LTS)`. For other supported Linux distributions, please refer to the Yocto Project Reference Manual.
 
