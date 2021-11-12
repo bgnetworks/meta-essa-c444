@@ -53,13 +53,13 @@ repo sync
 The files and directories that are in the bgn-essa-c444
 
 <p align="left">
-    <img src="assets/sync_dir.png" width=1000 alt="sync_dir" />
+    <img src="assets/sync_dir.png" width=600 alt="sync_dir" />
 </p>
 
 The Yocto meta directories that are in the sources
 
 <p align="left">
-    <img src="assets/yocto_meta_dir.png" width=1200 alt="yocto_meta_dir" />
+    <img src="assets/yocto_meta_dir.png" width=800 alt="yocto_meta_dir" />
 </p>
 
 
@@ -78,7 +78,7 @@ bitbake core-image-base
 The following build configurations should show up in the terminal:
 
 <p align="left">
-    <img src="assets/yocto_build_config.png" alt="yocto_build_config" />
+    <img src="assets/yocto_build_config.png" width=800 alt="yocto_build_config" />
 </p>
 
 **Note**: _the image build may take a few hours at the first time_
@@ -104,7 +104,7 @@ cd ~/bgn-essa-c444/build/tmp/deploy/images/imx8mq-itx-p-c444
 #### 3. set the `itx-p-c444` board to serial download mode
 
 <p align="left">
-    <img src="assets/c444_sdp.png" width=800 alt="c444_sdp" />
+    <img src="assets/c444_sdp.png" width=350 alt="c444_sdp" />
 </p>
 
 #### 4. Connect the board (_USB 3.1 Gen 1 connector_) to the build machine with a **USB type A to type A cable**
@@ -122,7 +122,7 @@ uuu -lsusb
 ```
 
 <p align="left">
-    <img src="assets/uuu_lsusb.png" width=1200 alt="uuu_lsusb" />
+    <img src="assets/uuu_lsusb.png" width=600 alt="uuu_lsusb" />
 </p>
 
 #### 7. burn the uboot and image
@@ -132,7 +132,7 @@ sudo uuu -b emmc_all imx-boot core-image-base-imx8mq-itx-p-c444.sdimg
 ```
 
 <p align="left">
-    <img src="assets/uuu_flash.png" width=1200 alt="uuu_flash" />
+    <img src="assets/uuu_flash.png" width=600 alt="uuu_flash" />
 </p>
 
 #### 8. power down the board
@@ -148,15 +148,15 @@ sudo minicom -s
 ```
 
 <p align="left">
-    <img src="assets/minicom_setup1.png" width=400 alt="minicom_setup1" />
+    <img src="assets/minicom_setup1.png" width=300 alt="minicom_setup1" />
 </p>
 
 <p align="left">
-    <img src="assets/minicom_setup2.png" width=1000 alt="minicom_setup2" />
+    <img src="assets/minicom_setup2.png" width=700 alt="minicom_setup2" />
 </p>
 
 <p align="left">
-    <img src="assets/minicom_setup3.png" width=400 alt="minicom_setup3" />
+    <img src="assets/minicom_setup3.png" width=300 alt="minicom_setup3" />
 </p>
 
 #### 2. open minicom
@@ -177,7 +177,7 @@ cd /data/caam
 ```
 
 <p align="left">
-    <img src="assets/black_key_creation.png" width=600 alt="black_key_creation" />
+    <img src="assets/black_key_creation.png" width=400 alt="black_key_creation" />
 </p>
 
 #### 6. add the key into the Linux keyring
@@ -187,7 +187,7 @@ cat mykey | keyctl padd logon mykey1: @s
 ```
 
 <p align="left">
-    <img src="assets/linux_keyring.png" width=800 alt="linux_keyring" />
+    <img src="assets/linux_keyring.png" width=500 alt="linux_keyring" />
 </p>
 
 #### 7. Create a file and link to loop device
@@ -204,7 +204,7 @@ dmsetup -v create myEncryptedBlock --table "0 $(blockdev --getsz /dev/loop0) cry
 ```
 
 <p align="left">
-    <img src="assets/dmsetup_command.png" width=1300 alt="dmsetup_command" />
+    <img src="assets/dmsetup_command.png" width=800 alt="dmsetup_command" />
 </p>
 
 #### 9. build file system
@@ -243,7 +243,7 @@ caam-keygen import mykey.bb importKey
 ```
 
 <p align="left">
-    <img src="assets/caam_importkey.png" width=700 alt="caam_importkey" />
+    <img src="assets/caam_importkey.png" width=400 alt="caam_importkey" />
 </p>
 
 #### 15. add the key into the Linux keyring
@@ -253,7 +253,7 @@ cat importKey | keyctl padd logon mykey2: @s
 ```
 
 <p align="left">
-    <img src="assets/linux_keyring2.png" width=900 alt="linux_keyring2" />
+    <img src="assets/linux_keyring2.png" width=500 alt="linux_keyring2" />
 </p>
 
 #### 16. link the file to loop device
@@ -277,5 +277,5 @@ mount /dev/mapper/myEncryptedBlock /mnt/myBlock
 #### 19. check the readme
 
 <p align="left">
-    <img src="assets/enc_test.png" width=1100 alt="enc_test" />
+    <img src="assets/enc_test.png" width=600 alt="enc_test" />
 </p>
