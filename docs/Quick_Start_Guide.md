@@ -3,6 +3,9 @@
 # Copyright (c) 2021 BG Networks, Inc.
 # See LICENSE file for license details.
 -->
+<p align="center">
+    <img src="assets/BGN_logo.png" alt="BGN_logo" />
+</p>
 
 # 1. System Requirements
 
@@ -49,15 +52,16 @@ repo sync
 
 The files and directories that are in the bgn-essa-c444
 
-<p align="center">
-    <img src="assets/sync_dir.png" alt="sync_dir" />
+<p align="left">
+    <img src="assets/sync_dir.png" width=1000 alt="sync_dir" />
 </p>
 
 The Yocto meta directories that are in the sources
 
-<p align="center">
-    <img src="assets/yocto_meta_dir.png" alt="yocto_meta_dir" />
+<p align="left">
+    <img src="assets/yocto_meta_dir.png" width=1200 alt="yocto_meta_dir" />
 </p>
+
 
 #### 4. setup the build environment at first time
 
@@ -73,7 +77,7 @@ bitbake core-image-base
 
 The following build configurations should show up in the terminal:
 
-<p align="center">
+<p align="left">
     <img src="assets/yocto_build_config.png" alt="yocto_build_config" />
 </p>
 
@@ -93,19 +97,19 @@ sudo snap install universal-update-utility
 cd ~/bgn-essa-c444/build/tmp/deploy/images/imx8mq-itx-p-c444
 ```
 
-<p align="center">
+<p align="left">
     <img src="assets/yocto_out_dir.png" alt="yocto_out_dir" />
 </p>
 
 #### 3. set the `itx-p-c444` board to serial download mode
 
-<p align="center">
-    <img src="assets/c444_sdp.png" alt="c444_sdp" />
+<p align="left">
+    <img src="assets/c444_sdp.png" width=800 alt="c444_sdp" />
 </p>
 
 #### 4. Connect the board (_USB 3.1 Gen 1 connector_) to the build machine with a **USB type A to type A cable**
 
-<p align="center">
+<p align="left">
     <img src="assets/c444_board.png" alt="c444_board" />
 </p>
 
@@ -117,8 +121,8 @@ cd ~/bgn-essa-c444/build/tmp/deploy/images/imx8mq-itx-p-c444
 uuu -lsusb
 ```
 
-<p align="center">
-    <img src="assets/uuu_lsusb.png" alt="uuu_lsusb" />
+<p align="left">
+    <img src="assets/uuu_lsusb.png" width=1200 alt="uuu_lsusb" />
 </p>
 
 #### 7. burn the uboot and image
@@ -127,8 +131,8 @@ uuu -lsusb
 sudo uuu -b emmc_all imx-boot core-image-base-imx8mq-itx-p-c444.sdimg
 ```
 
-<p align="center">
-    <img src="assets/uuu_flash.png" alt="uuu_flash" />
+<p align="left">
+    <img src="assets/uuu_flash.png" width=1200 alt="uuu_flash" />
 </p>
 
 #### 8. power down the board
@@ -143,16 +147,16 @@ sudo uuu -b emmc_all imx-boot core-image-base-imx8mq-itx-p-c444.sdimg
 sudo minicom -s
 ```
 
-<p align="center">
-    <img src="assets/minicom_setup1.png" alt="minicom_setup1" />
+<p align="left">
+    <img src="assets/minicom_setup1.png" width=400 alt="minicom_setup1" />
 </p>
 
-<p align="center">
-    <img src="assets/minicom_setup2.png" alt="minicom_setup2" />
+<p align="left">
+    <img src="assets/minicom_setup2.png" width=1000 alt="minicom_setup2" />
 </p>
 
-<p align="center">
-    <img src="assets/minicom_setup3.png" alt="minicom_setup3" />
+<p align="left">
+    <img src="assets/minicom_setup3.png" width=400 alt="minicom_setup3" />
 </p>
 
 #### 2. open minicom
@@ -172,8 +176,8 @@ caam-keygen create mykey ecb -s 16
 cd /data/caam
 ```
 
-<p align="center">
-    <img src="assets/black_key_creation.png" alt="black_key_creation" />
+<p align="left">
+    <img src="assets/black_key_creation.png" width=600 alt="black_key_creation" />
 </p>
 
 #### 6. add the key into the Linux keyring
@@ -182,8 +186,8 @@ cd /data/caam
 cat mykey | keyctl padd logon mykey1: @s
 ```
 
-<p align="center">
-    <img src="assets/linux_keyring.png" alt="linux_keyring" />
+<p align="left">
+    <img src="assets/linux_keyring.png" width=800 alt="linux_keyring" />
 </p>
 
 #### 7. Create a file and link to loop device
@@ -199,8 +203,8 @@ losetup /dev/loop0 encrypted.img
 dmsetup -v create myEncryptedBlock --table "0 $(blockdev --getsz /dev/loop0) crypt capi:tk(cbc(aes))-plain:36:logon:mykey1: 0 /dev/loop0 0 1 sector_size:512"
 ```
 
-<p align="center">
-    <img src="assets/dmsetup_command.png" alt="dmsetup_command" />
+<p align="left">
+    <img src="assets/dmsetup_command.png" width=1300 alt="dmsetup_command" />
 </p>
 
 #### 9. build file system
@@ -238,8 +242,8 @@ cd /data/caam
 caam-keygen import mykey.bb importKey
 ```
 
-<p align="center">
-    <img src="assets/caam_importkey.png" alt="caam_importkey" />
+<p align="left">
+    <img src="assets/caam_importkey.png" width=700 alt="caam_importkey" />
 </p>
 
 #### 15. add the key into the Linux keyring
@@ -248,8 +252,8 @@ caam-keygen import mykey.bb importKey
 cat importKey | keyctl padd logon mykey2: @s
 ```
 
-<p align="center">
-    <img src="assets/linux_keyring2.png" alt="linux_keyring2" />
+<p align="left">
+    <img src="assets/linux_keyring2.png" width=900 alt="linux_keyring2" />
 </p>
 
 #### 16. link the file to loop device
@@ -272,6 +276,6 @@ mount /dev/mapper/myEncryptedBlock /mnt/myBlock
 
 #### 19. check the readme
 
-<p align="center">
-    <img src="assets/enc_test.png" alt="enc_test" />
+<p align="left">
+    <img src="assets/enc_test.png" width=1100 alt="enc_test" />
 </p>
