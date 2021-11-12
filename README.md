@@ -3,6 +3,9 @@
 # Copyright (c) 2021 BG Networks, Inc.
 # See LICENSE file for license details.
 -->
+<p align="center">
+    <img src="docs/assets/BGN_logo.png" alt="BGN_logo" />
+</p>
 
 # meta-bgn-essa
 
@@ -39,7 +42,7 @@ See the [Quick Start Guide](docs/Quick_Start_Guide.md) for instructions of build
 
 ## Detailed Guide
 
-To know more about the BG Networks ESSA and its potential capabilities, [contact BG Networks](https://bgnet.works/contact-us).
+To know more about the [BG Networks ESSA](https://bgnet.works/download-essa-user-guide/) and its potential capabilities, [contact BG Networks](https://bgnet.works/contact-us).
 
 ## Contributing
 
