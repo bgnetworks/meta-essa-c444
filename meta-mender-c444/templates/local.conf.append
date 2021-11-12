@@ -14,8 +14,8 @@ PREFERRED_PROVIDER_u-boot = "u-boot-imx"
 IMAGE_CLASSES += "mender-setup-c444"
 
 # Uncomment the following 2 lines to boot from eMMC on imx8mq-itx-p-c444
-# MENDER_STORAGE_DEVICE_imx8mq-itx-p-c444 = "/dev/mmcblk0"
-# MENDER_UBOOT_STORAGE_DEVICE_imx8mq-itx-p-c444 = "0"
+MENDER_STORAGE_DEVICE_imx8mq-itx-p-c444 = "/dev/mmcblk0"
+MENDER_UBOOT_STORAGE_DEVICE_imx8mq-itx-p-c444 = "0"
 
 # Boot from SD
-MENDER_STORAGE_DEVICE_imx8mq-itx-p-c444 = "/dev/mmcblk1"
+# MENDER_STORAGE_DEVICE_imx8mq-itx-p-c444 = "/dev/mmcblk1"
