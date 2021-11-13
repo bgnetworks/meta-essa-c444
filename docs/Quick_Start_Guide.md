@@ -36,7 +36,7 @@ mkdir ~/bgn-essa-c444
 cd ~/bgn-essa-c444
 ```
 
-#### 2. repository initialization
+#### 2. Repository initialization
 
 ```bash
 repo init -u https://github.com/bgnetworks/c444-manifest.git -b master -m itx-p-c444_5.4.47.xml
@@ -44,32 +44,32 @@ wget --directory-prefix .repo/manifests https://raw.githubusercontent.com/bgnetw
 repo init -m c444_5.4.47-essa-demo.xml
 ```
 
-#### 3. pull repositories
+#### 3. Pull repositories
 
 ```bash
 repo sync
 ```
 
-The files and directories that are in the bgn-essa-c444
+Files and directories that are in the bgn-essa-c444
 
 <p align="left">
     <img src="assets/sync_dir.png" width=600 alt="sync_dir" />
 </p>
 
-The Yocto meta directories that are in the sources
+Yocto meta directories that are in the sources
 
 <p align="left">
     <img src="assets/yocto_meta_dir.png" width=800 alt="yocto_meta_dir" />
 </p>
 
 
-#### 4. setup the build environment at first time
+#### 4. Setup the build environment at first time
 
 ```bash
 MACHINE=imx8mq-itx-p-c444 DISTRO=c444-xwayland source c444-setup-essa.sh -b build
 ```
 
-#### 5. build core image
+#### 5. Build core image
 
 ```bash
 bitbake core-image-base
@@ -81,17 +81,17 @@ The following build configurations should show up in the terminal:
     <img src="assets/yocto_build_config.png" width=800 alt="yocto_build_config" />
 </p>
 
-**Note**: _the image build may take a few hours at the first time_
+**Note**: _The initial image build may take a few hours_
 
 # 3. Program the images into the board EMMC
 
-#### 1. install uuu tool
+#### 1. Install uuu tool
 
 ```bash
 sudo snap install universal-update-utility
 ```
 
-#### 2. change to the image directory
+#### 2. Change to the image directory
 
 ```bash
 cd ~/bgn-essa-c444/build/tmp/deploy/images/imx8mq-itx-p-c444
@@ -101,7 +101,7 @@ cd ~/bgn-essa-c444/build/tmp/deploy/images/imx8mq-itx-p-c444
     <img src="assets/yocto_out_dir.png" alt="yocto_out_dir" />
 </p>
 
-#### 3. set the `itx-p-c444` board to serial download mode
+#### 3. Set the `itx-p-c444` board to serial download mode
 
 <p align="left">
     <img src="assets/c444_sdp.png" width=350 alt="c444_sdp" />
@@ -125,7 +125,7 @@ uuu -lsusb
     <img src="assets/uuu_lsusb.png" width=600 alt="uuu_lsusb" />
 </p>
 
-#### 7. burn the uboot and image
+#### 7. Burn the uboot and image
 
 ```bash
 sudo uuu -b emmc_all imx-boot core-image-base-imx8mq-itx-p-c444.sdimg
@@ -135,13 +135,13 @@ sudo uuu -b emmc_all imx-boot core-image-base-imx8mq-itx-p-c444.sdimg
     <img src="assets/uuu_flash.png" width=600 alt="uuu_flash" />
 </p>
 
-#### 8. power down the board
+#### 8. Power down the board
 
-#### 9. set the `itx-p-c444` board to the `eMMC` boot mode
+#### 9. Set the `itx-p-c444` board to the `eMMC` boot mode
 
 # 4. Block encryption example
 
-#### 1. set up minicom
+#### 1. Set up minicom
 
 ```bash
 sudo minicom -s
@@ -159,17 +159,17 @@ sudo minicom -s
     <img src="assets/minicom_setup3.png" width=300 alt="minicom_setup3" />
 </p>
 
-#### 2. open minicom
+#### 2. Open minicom
 
 ```bash
 sudo minicom
 ```
 
-#### 3. connect to the `itx-p-c444` board `J3 - COM PORT 1` with a USB-UART cable
+#### 3. Connect to the `itx-p-c444` board `J3 - COM PORT 1` with a USB-UART cable
 
-#### 4. power up the `itx-p-c444` board and log in as `root` after booting is completed
+#### 4. Power up the `itx-p-c444` board and log in as `root` after booting is completed
 
-#### 5. create a random key
+#### 5. Create a random key
 
 ```bash
 caam-keygen create mykey ecb -s 16
@@ -180,7 +180,7 @@ cd /data/caam
     <img src="assets/black_key_creation.png" width=400 alt="black_key_creation" />
 </p>
 
-#### 6. add the key into the Linux keyring
+#### 6. Add the key into the Linux keyring
 
 ```bash
 cat mykey | keyctl padd logon mykey1: @s
@@ -197,7 +197,7 @@ dd if=/dev/zero of=encrypted.img bs=1M count=32
 losetup /dev/loop0 encrypted.img
 ```
 
-#### 8. use the generated random key for block encryption
+#### 8. Use the generated random key for block encryption
 
 ```bash
 dmsetup -v create myEncryptedBlock --table "0 $(blockdev --getsz /dev/loop0) crypt capi:tk(cbc(aes))-plain:36:logon:mykey1: 0 /dev/loop0 0 1 sector_size:512"
@@ -207,35 +207,35 @@ dmsetup -v create myEncryptedBlock --table "0 $(blockdev --getsz /dev/loop0) cry
     <img src="assets/dmsetup_command.png" width=800 alt="dmsetup_command" />
 </p>
 
-#### 9. build file system
+#### 9. Build file system
 
 ```bash
 mkfs.ext4 /dev/mapper/myEncryptedBlock
 ```
 
-#### 10. mount the encrypted block
+#### 10. Mount the encrypted block
 
 ```bash
 mkdir -p /mnt/myBlock
 mount /dev/mapper/myEncryptedBlock /mnt/myBlock
 ```
 
-#### 11. create a new file in the encrypted block
+#### 11. Create a new file in the encrypted block
 
 ```bash
 echo "This is a test of disk encryption on i.MX" > /mnt/myBlock/readme.txt
 ```
 
-#### 12. umount and remove the encrypted block
+#### 12. Umount and remove the encrypted block
 
 ```bash
 umount /mnt/myBlock
 dmsetup remove myEncryptedBlock
 ```
 
-#### 13. power cycle the `itx-p-c444` board and log in as `root` after the booting is completed
+#### 13. Power cycle the `itx-p-c444` board and log in as `root` after the booting is completed
 
-#### 14. import the generated random key
+#### 14. Import the generated random key
 
 ```bash
 cd /data/caam
@@ -246,7 +246,7 @@ caam-keygen import mykey.bb importKey
     <img src="assets/caam_importkey.png" width=400 alt="caam_importkey" />
 </p>
 
-#### 15. add the key into the Linux keyring
+#### 15. Add the key into the Linux keyring
 
 ```bash
 cat importKey | keyctl padd logon mykey2: @s
@@ -256,25 +256,25 @@ cat importKey | keyctl padd logon mykey2: @s
     <img src="assets/linux_keyring2.png" width=500 alt="linux_keyring2" />
 </p>
 
-#### 16. link the file to loop device
+#### 16. Link the file to loop device
 
 ```bash
 losetup /dev/loop0 encrypted.img
 ```
 
-#### 17. use the imported key for block encryption
+#### 17. Use the imported key for block encryption
 
 ```bash
 dmsetup -v create myEncryptedBlock --table "0 $(blockdev --getsz /dev/loop0) crypt capi:tk(cbc(aes))-plain:36:logon:mykey2: 0 /dev/loop0 0 1 sector_size:512"
 ```
 
-#### 18. mount the encrypted block
+#### 18. Mount the encrypted block
 
 ```bash
 mount /dev/mapper/myEncryptedBlock /mnt/myBlock
 ```
 
-#### 19. check the readme
+#### 19. Check the readme
 
 <p align="left">
     <img src="assets/enc_test.png" width=600 alt="enc_test" />
