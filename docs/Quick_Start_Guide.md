@@ -200,7 +200,7 @@ losetup /dev/loop0 encrypted.img
 #### 8. Use the generated random key for block encryption
 
 ```bash
-dmsetup -v create myEncryptedBlock --table "0 $(blockdev --getsz /dev/loop0) crypt capi:tk(cbc(aes))-plain:36:logon:mykey1: 0 /dev/loop0 0 1 sector_size:512"
+dmsetup -v create myEncryptedBlock --table "0 $(blockdev --getsz /dev/loop0) crypt capi:tk(cbc(aes))-plain :36:logon:mykey1: 0 /dev/loop0 0 1 sector_size:512"
 ```
 
 <p align="left">
@@ -265,7 +265,7 @@ losetup /dev/loop0 encrypted.img
 #### 17. Use the imported key for block encryption
 
 ```bash
-dmsetup -v create myEncryptedBlock --table "0 $(blockdev --getsz /dev/loop0) crypt capi:tk(cbc(aes))-plain:36:logon:mykey2: 0 /dev/loop0 0 1 sector_size:512"
+dmsetup -v create myEncryptedBlock --table "0 $(blockdev --getsz /dev/loop0) crypt capi:tk(cbc(aes))-plain :36:logon:mykey2: 0 /dev/loop0 0 1 sector_size:512"
 ```
 
 #### 18. Mount the encrypted block
