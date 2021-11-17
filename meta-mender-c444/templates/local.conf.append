@@ -13,9 +13,13 @@ MENDER_DEVICE_TYPES_COMPATIBLE = "imx8mq-itx-p-c444"
 PREFERRED_PROVIDER_u-boot = "u-boot-imx"
 IMAGE_CLASSES += "mender-setup-c444"
 
+# SD and eMMC boot are mutually exclusive. Please select only one, either SD boot or eMMC boot
+
+# Boot from eMMC
 # Uncomment the following 2 lines to boot from eMMC on imx8mq-itx-p-c444
 MENDER_STORAGE_DEVICE_imx8mq-itx-p-c444 = "/dev/mmcblk0"
 MENDER_UBOOT_STORAGE_DEVICE_imx8mq-itx-p-c444 = "0"
 
-# Boot from SD
+# Boot from SD card
+# Uncomment the following line to boot from a SD card on imx8mq-itx-p-c444
 # MENDER_STORAGE_DEVICE_imx8mq-itx-p-c444 = "/dev/mmcblk1"
