@@ -44,7 +44,7 @@ bitbake core-image-base
 
 ## Detailed Guide
 
-To know more about the BG Networks ESSA and its potential capabilities, [contact BG Networks](https://bgnet.works/contact-us).
+To download a detailed guide to BG Networks ESSA click [here](https://bgnet.works/download-essa-user-guide/). 
 
 ## Contributing
 
