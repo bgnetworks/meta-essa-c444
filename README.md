@@ -8,7 +8,7 @@
 
 # meta-bgn-essa
 
-[BG Network's](https://bgnet.works/) [Embedded Security Software Architecture](https://bgnet.works/embedded-security-software-architecture/) (ESSA), a collection of scripts, recipes, configurations, and documentation for Linux, enhances cybersecurity for IoT devices, including secure boot, encryption, authentication, and secure software updates. The ESSA enables engineers to extend a hardware root of trust to secure U-Boot, the Linux kernel, and applications in the root file system.
+[BG Network's](https://bgnet.works/) [Embedded Security Software Architecture](https://bgnet.works/bgn-essa/) (ESSA), a collection of scripts, recipes, configurations, and documentation for Linux, enhances cybersecurity for IoT devices, including secure boot, encryption, authentication, and secure software updates. The ESSA enables engineers to extend a hardware root of trust to secure U-Boot, the Linux kernel, and applications in the root file system.
 
 This repository is based on [WinSystems/c444-manifest](https://github.com/WinSystems/c444-manifest/tree/master) (_5.4.24 release_) and enables [Mender](https://mender.io/) OTA and NXP's HAB features on WINSYSTEM's [ITX-P-C444](https://www.winsystems.com/product/itx-p-c444/) hardware.
 
@@ -44,7 +44,7 @@ bitbake core-image-base
 
 ## Detailed Guide
 
-To download a detailed guide to BG Networks ESSA click [here](https://bgnet.works/download-essa-user-guide/). 
+To download a detailed guide to BG Networks ESSA click [here](https://bgnet.works/essa-users-guide/). 
 
 ## Contributing
 
